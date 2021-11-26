@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="cmmn/fragments/main/header">
+    <title>WE ARE GO</title>
+    <!--  ajax요청을 위한 토큰 설정  -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<!--페이지 컨텐츠 -->
+<div layout:fragment="content">
+    공통 레이아웃
+</div>
+
+<th:block th:insert="cmmn/fragments/main/footer"></th:block>
+</body>
+</html>

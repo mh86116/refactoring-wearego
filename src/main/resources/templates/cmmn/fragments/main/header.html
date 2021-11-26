@@ -1,0 +1,97 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:fragment="fragment-header">
+    <th:block th:insert="cmmn/fragments/main/head"></th:block>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!--  ajax요청을 위한 토큰 설정  -->
+<!--    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>-->
+<!--    &lt;!&ndash; default header name is X-CSRF-TOKEN &ndash;&gt;-->
+<!--    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+    <title>WE ARE GO</title>
+</head>
+<body>
+<!--onpageshow="if (e.persisted) noBack();"-->
+<a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+<header id="aa-header">
+    <div class="aa-header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aa-header-bottom-area">
+                        <div class="aa-logo">
+                            <a href="/"><img src="/main/img/logo_wearego.png" alt="logo img"></a>
+                        </div>
+                        <div class="aa-search-box">
+                            <form action="">
+                                <input type="text" name="" id="aa-search-box" placeholder="원하는 상품을 입력해주세요!">
+                                <button type="submit"><span class="fa fa-search"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="menu">
+    <div class="container">
+        <div class="menu-area">
+            <!-- Navbar -->
+            <div class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!-- Left nav -->
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/goods/list">투어상품 </a></li>
+                        <li><a href="/register">회원가입</a></li>
+                        <li><a href="/board/beginner"> 여행팁</a></li>
+                        <li><a href="/board/questions">자주하는질문</a></li>
+                        <li class="login-menu"><a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')"> 관리자페이지</a></li>
+                        <li class="login-menu"><a sec:authorize="isAnonymous()" data-toggle="modal"
+                                                  data-target="#login-modal">로그인</a></li>
+                        <li class="login-menu"><a sec:authorize="isAuthenticated()" th:href="@{/logout}" onload="noBack();">로그아웃</a></li>
+                        <li class="login-menu"><a sec:authorize="isAuthenticated()" th:href="@{/member/myPage}"><span
+                                sec:authentication="name"></span>님! &ensp;반갑습니다.</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>로그인 및 회원가입</h4>
+                <form class="aa-login-form" th:action="@{/login}" method="post">
+                    <label for="email">아이디 <span>*</span></label>
+                    <input type="email" placeholder="email 을 입력하세요." id="email" name="username">
+                    <label for="pwd">비밀번호<span>*</span></label>
+                    <input type="password" placeholder="비밀번호를 입력하세요." id="pwd" name="password">
+                    <!--                    <label for="rememberMe" class="all" aria-describedby="rememberMeHelp">-->
+                    <!--                        <input type="checkbox" id="rememberMe" name="remember-me" checked>자동 로그인</label>-->
+                    <button class="aa-browse-btn" type="submit">로그인</button>
+                    <br>
+                    <p class="aa-lost-password"><a href="/login/findAccount">비밀번호를 잊었나요?</a></p>
+                    <div class="aa-register-now">
+                        아직도 계정이 없으신가요??<a href="/join">지금 가입하세요!</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
