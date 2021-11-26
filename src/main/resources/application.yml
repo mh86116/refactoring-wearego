@@ -1,0 +1,12 @@
+server:
+  port: 86
+spring:
+  profiles:
+    # local: 개발 및 로컬 환경, prod: 서버 운영환경
+    active: local
+  thymeleaf:
+    excluded-view-names: thymeleaf/*
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
