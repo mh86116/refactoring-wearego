@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/layout}" lang="ko">
+<body layout:fragment="content">
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">
+                    <div class="row-middle">
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-register">
+                                <h4>회원가입</h4>
+                                <div class="aa-center">
+                                    <form id="joinForm" th:action="@{/join}" class="aa-login-form" method="post">
+                                        <label for="email">E-mail<span>*</span></label>
+                                        <input type="email" placeholder="이메일을 입력해주세요." id="email" name="email">
+<!--&lt;!&ndash;                                        <form th:action="@{/mail}" method="post">&ndash;&gt;-->
+<!--                                            <button onclick="emailSend()">인증받기</button>-->
+<!--&lt;!&ndash;                                        </form>&ndash;&gt;-->
+<!--                                        <label for="certificationNumber">인증번호<span>*</span></label>-->
+<!--                                        <input type="text" placeholder="인증번호를 입력해주세요." id="certificationNumber" >-->
+<!--                                            <button id="certification" onclick="emailCertification()">인증받기</button>-->
+                                        <label for="pwd">비밀번호<span>*</span></label>
+                                        <input type="password" placeholder="Password" id="pwd" name="pwd" >
+                                        <label for="pwd2">비밀번호확인<span>*</span></label>
+                                        <input type="password" placeholder="Password" id="pwd2" name="pwd2" >
+                                        <label for="nickname">닉네임<span>*</span></label>
+                                        <input type="text" placeholder="닉네임을 입력해주세요." id="nickname" name="nickname"
+                                               >
+                                        <label for="phone">핸드폰<span>*</span></label>
+                                        <input type="tel" placeholder="휴대폰번호를 입력해주세요" id="phone" name="phone" >
+                                        <button type="submit" class="aa-browse-btn">회원가입</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
