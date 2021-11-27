@@ -1,4 +1,4 @@
-package com.greedy.TravelWithGuid.config;
+package com.greedy.TravelWithGuid.cmmn.config;
 
 import com.greedy.TravelWithGuid.cmmn.util.ExceptionHandlerFilter;
 import com.greedy.TravelWithGuid.login.service.LoginService;
