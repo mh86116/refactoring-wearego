@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
-import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
 import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
@@ -17,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Table(name = "GUIDE")
-public class Guide extends BaseTimeEntity implements Persistable<Long> {
+public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GUIDE_NO")

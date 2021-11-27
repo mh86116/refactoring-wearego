@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
-import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "GOODS_OPTION")
-public class GoodsOption extends BaseTimeEntity implements Persistable<Long> {
+public class GoodsOption extends BaseTimeRegisterEntity implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OPTION_CODE")
