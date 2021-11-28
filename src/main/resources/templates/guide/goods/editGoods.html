@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/layout}" lang="ko">
+<body layout:fragment="content">
+
+<section id="aa-product-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-product-details-area">
+                    <div class="aa-product-details-content">
+                        <div class="row">
+                            <!-- Modal view slider -->
+                            <form th:action="@{/goods/editGoods}" method="post" enctype="multipart/form-data">
+                                <div class="col-md-5 col-sm-5 col-xs-12">
+                                    <div class="aa-product-view-slider">
+                                        <div id="demo-1" class="simpleLens-gallery-container">
+                                            <div class="simpleLens-container">
+                                                <div class="simpleLens-big-image-container">
+                                                    <a data-lens-image="/main/img/view-slider/large/polo-shirt-1.png"
+                                                       class="simpleLens-lens-image">
+                                                        <img class="simpleLens-big-image" >
+                                                    </a>
+                                                                                                    <input type="file" name="file" multiple/>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="simpleLens-thumbnails-container">
+                                                <!--                                            <a data-big-image="/we/resources/user/img/view-slider/medium/polo-shirt-1.png"-->
+                                                <!--                                               data-lens-image="/we/resources/user/img/view-slider/large/polo-shirt-1.png"-->
+                                                <!--                                               class="simpleLens-thumbnail-wrapper" href="#">-->
+                                                <!--                                                <img class="simpleLens-big-image" id="bodyImg1" multiple onclick="bodyImg1()" alt="" src="">-->
+                                                <!--                                            </a>-->
+                                                <!--                                            <a data-big-image="/main/img/view-slider/medium/polo-shirt-3.png"-->
+                                                <!--                                               data-lens-image="/main/img/view-slider/large/polo-shirt-3.png"-->
+                                                <!--                                               class="simpleLens-thumbnail-wrapper" href="#">-->
+                                                <!--                                                <img  class="simpleLens-big-image" id="bodyImg2" multiple onclick="bodyImg2()" alt="" src="">-->
+                                                <!--                                            </a>-->
+                                                <!--                                               data-lens-image="/main/img/view-slider/large/polo-shirt-4.png"-->
+<!--                                                <a data-big-image="/main/img/view-slider/medium/polo-shirt-4.png"-->
+<!--                                                   data-lens-image=""-->
+<!--                                                   class="simpleLens-thumbnail-wrapper" href="#">-->
+<!--                                                    <img width="45" height="55" style="border: 1px solid red;" id="titleImage" multiple onclick="goodsImage()">-->
+<!--                                                </a>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal view content -->
+                                <table style="margin-left: 50px;">
+                                    <thead>
+                                    <tr>
+                                        <td style="width: 500px; line-height: 45px; vertical-align: middle;">
+                                            <label style="font-size: 16px; margin-right: 33px;"
+                                                   for="title">제목&ensp;</label>
+                                            <input class="summernoteInput" name="title" id="title"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 500px; line-height: 45px; vertical-align: middle;">
+                                            <label style="font-size: 16px; margin-right: 33px;"
+                                                   for="price">가격&ensp;</label>
+                                            <input type="number" class="summernoteInput" name="price" id="price"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 500px; line-height: 45px; vertical-align: middle;"><label
+                                                style="font-size: 16px;" for="place">미팅 장소&ensp;</label>
+                                            <input type="text" name="place" id="place" placeholder="ex) 장소 협의"
+                                                   class="summernoteInput">
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 500px; line-height: 45px; vertical-align: middle;">
+                                            <label style="font-size: 16px;" for="startDt">시작 날짜&ensp;</label>
+                                            <input type="text" name="startDt" id="startDt" autocomplete="off" readonly
+                                                   class="date summernoteDate inputDate">
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 500px; line-height: 45px; vertical-align: middle;">
+                                            <label style="font-size: 16px;" for="endDt">종료 날짜&ensp;</label>
+                                            <input type="text" name="endDt" id="endDt" autocomplete="off" readonly
+                                                   class="date summernoteDate inputDate">
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 500px; line-height: 45px; vertical-align: middle;"><label
+                                                style="font-size: 16px;" for="person">인 원 (최대 5명)&ensp;</label>
+                                            <input type="number" name="person" id="person" max="5"
+                                                   min="1" step="1" class="summernoteDate">&ensp;</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="option">
+                                    <tr>
+                                        <td style="width: 500px; line-height: 25px; vertical-align: middle; padding-bottom: 20px;">
+                                            <label>옵션 선택</label>&ensp;
+                                            <button type="button" class="summerBtn" onclick="addOption(this)">추가
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr id="optionList_">
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="aa-product-details-bottom" style="text-align: center;">
+                                    <h1 class="summernoteTitle">투어 / 코스 / 안내사항</h1>
+                                    <textarea class="summernote" id="summernote" style="text-align: center;" rows="10" cols="100"
+                                              name="body"></textarea>
+                                    <div style="text-align: center;">
+                                        <button type="submit" class="aa-browse-btn" id="button">등록하기</button>
+                                        <button type="reset" class="aa-browse-btn"
+                                                style="background-color: #ffffff; color:#ff6666">취소하기
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div>
+    <input type="file" id="thumbnailImg11" multiple name="thumbnailImg11" onchange="loadImg(this, 1)">
+    <!--    <input type="file" id="thumbnailImg22" name="thumbnailImg22" onchange="loadImg(this, 2)">-->
+    <!--    <input type="file" id="thumbnailImg33" name="thumbnailImg33" onchange="loadImg(this, 3)">-->
+</div>
+</body>
+</html>

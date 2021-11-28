@@ -42,7 +42,7 @@ public class GoodsController {
         System.out.println("result = " + result);
         if (result) {
             model.addAttribute("msg", "등록 승인 대기중입니다. 승인이 완료될 때까지 기다려 주세요.");
-            model.addAttribute("movePath", "/goods/detail");
+            model.addAttribute("movePath", "/goods/editGoods");
             return "cmmn/success";
         } else {
             model.addAttribute("msg", "등록이 실패 되었습니다. 다시 확인해주세요.");

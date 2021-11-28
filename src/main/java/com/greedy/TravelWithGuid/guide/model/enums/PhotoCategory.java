@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PhotoCategory {
-    GUIDE(1),
-    GOODS(2);
+    GUIDE("GUIDE"),
+    GOODS("GOODS");
 
-    private int vaule;
+    private String vaule;
 }

@@ -85,11 +85,11 @@ public class GoodsServiceImpl implements GoodsService {
                     newFilePath.write(file.getBytes());
 
                     Attachment attachment = Attachment.builder()
-                            .category(PhotoCategory.valueOf(PhotoCategory.GOODS.getVaule()))
+                            .category(PhotoCategory.GOODS)
                             .originalName(file.getOriginalFilename())
                             .savedName(savedName)
                             .savePath(filePath.getPath())
-                            .isEnable(String.valueOf(false))
+                            .isEnable(false)
                             .build();
                     attachmentRepository.save(attachment);
                     System.out.println("attachment = " + attachment);

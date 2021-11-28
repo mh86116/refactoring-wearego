@@ -33,7 +33,7 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     private String savePath;
 
     @Column(name = "IS_ENABLE")
-    private String isEnable;
+    private boolean isEnable;
 
     @Override
     public boolean isNew() {

@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -21,6 +22,7 @@ public class BaseTimeRegisterEntity {
     private LocalDateTime createdDt;
 
     @CreatedBy
+            @Column(name = "CREATE_BY", updatable = false)
     private String createBy;
 
     @PrePersist
