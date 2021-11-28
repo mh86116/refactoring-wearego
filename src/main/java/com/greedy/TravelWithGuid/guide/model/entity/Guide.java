@@ -28,18 +28,18 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
     private Member member;
 
     @Column(name = "GUIDE_NAME")
-    private Long name;
+    private String name;
 
     @Column(name = "GUIDE_EMAIL")
     private String email;
 
     @Column(name = "GUIDE_BANK")
-    private Long bank;
+    private String bank;
 
     @Column(name = "GUIDE_ACCOUNT")
-    private Long account;
+    private String account;
 
-    @Column(name = "GUIDE_INTRO")
+    @Column(name = "GUIDE_INTRO", length = 4000)
     private String intro;
 
     @Column(name = "GUIDE_RANK")

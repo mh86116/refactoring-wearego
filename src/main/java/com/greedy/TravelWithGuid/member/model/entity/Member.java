@@ -29,7 +29,7 @@ public class Member extends BaseTimeRegisterEntity implements Persistable<Long> 
     @Column(name = "PWD")
     private String pwd;
 
-    @Column(name = "NICKNAME")
+    @Column(name = "NICKNAME", unique = true)
     private String nickname;
 
     @Column(name = "PHONE")

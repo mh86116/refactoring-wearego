@@ -7,6 +7,8 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.STRING;
+
 @Getter @Entity
 @Builder @ToString
 @AllArgsConstructor
@@ -17,7 +19,8 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     @Column(name = "ATTACHMENT_NO")
     private Long id;
 
-    @JoinColumn(name = "CATEGORY_")
+    @Enumerated(STRING)
+    @Column(name = "CATEGORY_")
     private PhotoCategory category;
 
     @Column(name = "ORIGINAL_NAME")
