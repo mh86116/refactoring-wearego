@@ -8,12 +8,7 @@
     <!-- default header name is X-CSRF-TOKEN -->
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
-<body>
-<!--페이지 컨텐츠 -->
-<div layout:fragment="content">
-    공통 레이아웃
-</div>
-
+<body layout:fragment="content">
 <th:block th:insert="cmmn/fragments/admin/footer"></th:block>
 </body>
 </html>

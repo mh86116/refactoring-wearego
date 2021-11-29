@@ -21,8 +21,9 @@ public class BaseTimeRegisterEntity {
     @Column(name = "created_dt", updatable = false)
     private LocalDateTime createdDt;
 
+    @CreatedDate
     @CreatedBy
-            @Column(name = "CREATE_BY", updatable = false)
+    @Column(name = "CREATE_BY", updatable = false)
     private String createBy;
 
     @PrePersist

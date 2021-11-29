@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/adminLayout}" lang="ko">
+
+<body layout:fragment="content">
+<section id="container">
+  <section id="main-content">
+    <section class="wrapper">
+      <h3><i class="fa fa-angle-right"></i> 가입 회원 관리</h3>
+      <div class="row mb">
+        <!-- page start-->
+        <div class="content-panel">
+          <div class="adv-table" style="margin: 10px;" id="memberTable">
+            <table class="display table table-bordered" style="text-align: center; vertical-align: middle;">
+              <thead>
+              <tr>
+                <th class="table-th"><i class="fa fa-bullhorn"></i>회원번호</th>
+                <th class="table-th"><i class=" fa fa-edit"></i>E-MAIL</th>
+                <th class="table-th"><i class="fa fa-bookmark"></i>닉네임</th>
+                <th class="table-th"><i class=" fa fa-edit"></i>연락처</th>
+                <th class="table-th"><i class=" fa fa-edit"></i>회원권한</th>
+                <th class="table-th"><i class=" fa fa-edit"></i>가입상태</th>
+                <th class="table-th"><i class=" fa fa-edit"></i>가입일자</th>
+<!--                <th class="table-th"><i class=" fa fa-edit"></i>등업</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="list : ${members}">
+                <td th:text="${list.no}" style="vertical-align: middle;" id="no"></td>
+                <td th:text="${list.nickname}" style="vertical-align: middle;"></td>
+                <td th:text="${list.email}" style="vertical-align: middle;"></td>
+                <td th:text="${list.authority}" style="vertical-align: middle;"></td>
+                <td th:text="${list.phone}" style="vertical-align: middle;"></td>
+                <td th:text="${list.isEnable()}" style="vertical-align: middle;"></td>
+                <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
+<!--                <td style="vertical-align: middle;" >-->
+<!--                  <button class="btn" onclick="processMember(this)">등업</button>-->
+<!--                </td>-->
+              </tr>
+              </tbody>
+            </table>
+
+            <form id="members" onsubmit="return false;" method="get" style="display: inline-block;">
+              <!-- Nm 검색 폼-->
+              <div class="form-group">
+                <label for="searchKeyword" class="search-label">
+                  <input class="input-txt" th:value="${word}" id="searchKeyword" name="word" placeholder="회원번호, 이름으로 조회" ></label>
+                <button class="btn btn-send" onclick="searchMember()">검색</button>
+              </div>
+            </form>
+
+            <!-- 페이징 처리 -->
+            <ul class="dataTables_paginate paging_bootstrap pagination"
+                th:with="start=${T(Math).floor(members.number/10)*10 + 1},
+                    last=(${start + 9 < members.totalPages ? start + 9 : members.totalPages})">
+              <th:block th:with="
+                firstAddr=@{/admin/members(page=1,word=${word},paging=true)},
+                prevAddr=@{/admin/members(page=${members.number},word=${word},paging=true)},
+                nextAddr=@{/admin/members(page=${members.number + 2},word=${word},paging=true)},
+                lastAddr=@{/admin/members(page=${members.totalPages},word=${word},paging=true)}">
+                <!-- ** 첫번째 페이지 -->
+                <li>
+                  <a th:href="${firstAddr}" aria-label="First">
+                    <span aria-hidden="true">First</span>
+                  </a>
+                </li><!-- /첫번째 페이지 -->
+                <!-- ** 이전 페이지 -->
+                <li th:class="${members.first} ? 'disabled'">
+                  <a th:href="${members.first} ? '#' :${prevAddr}"
+                     aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                  </a>
+                </li><!-- /이전 페이지로 가기 버튼 -->
+                <!-- ** 1,2,3,4,... 페이지 -->
+                <li th:each="page: ${#numbers.sequence(start, last)}"
+                    th:class="${page == members.number + 1} ? 'active'">
+                  <a th:text="${page}"
+                     th:href="@{/admin/members(page=${page},word=${word},paging=true)}"></a>
+                </li><!-- /1,2,3,4,.. 페이지-->
+                <!-- ** 다음 페이지 -->
+                <li th:class="${members.last} ? 'disabled'">
+                  <a th:href="${members.last} ? '#' : ${nextAddr}"
+                     aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                  </a>
+                </li><!--/다음 페이지 -->
+                <!-- ** 마지막 페이지로 이동 -->
+                <li>
+                  <a th:href="${lastAddr}" aria-label="Last">
+                    <span aria-hidden="true">Last</span>
+                  </a>
+                </li><!-- /마지막 페이지로 이동 -->
+              </th:block>
+            </ul>
+          </div>
+        </div><!-- page end-->
+      </div><!-- /row -->
+    </section><!-- /wrapper -->
+  </section>
+</section><!-- /MAIN CONTENT -->
+</body>
+</html>

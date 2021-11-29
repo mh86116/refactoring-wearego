@@ -31,8 +31,8 @@ public class LoginServiceImpl implements LoginService {
             Member member = Member.builder()
                     .email(dto.getEmail())
                     .pwd(passwordEncoder.encode(dto.getPwd()))
-                    .nickname(dto.getNickname())
-                    .phone(dto.getPhone())
+                    .nickname(dto.getNickname().replace(" ", ""))
+                    .phone(dto.getPhone().replace("-", ""))
                     .authority(Role.MEMBER.getValue())
                     .isEnable(true)
                     .build();
