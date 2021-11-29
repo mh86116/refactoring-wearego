@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Warning {
+    BASIC("BASIC"),
     YELLOW("YELLOW"),
     ORANGE("ORANGE"),
     RED("RED");

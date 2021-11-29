@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class GoodsDTO {
+public class EditGoodsDTO {
     private String email;
     private String title;
     private String price;

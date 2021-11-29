@@ -42,4 +42,5 @@ public class Member extends BaseTimeRegisterEntity implements Persistable<Long> 
     public boolean isNew() {
         return getCreatedDt() == null;
     }
+
 }

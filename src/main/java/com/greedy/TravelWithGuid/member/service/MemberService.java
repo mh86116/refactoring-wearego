@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface MemberService {
 
     Page<MemberDTO> getMembers(String word, Pageable pageable);
+
 }

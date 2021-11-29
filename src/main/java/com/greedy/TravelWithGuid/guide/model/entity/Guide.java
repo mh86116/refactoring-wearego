@@ -42,9 +42,11 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
     @Column(name = "GUIDE_INTRO", length = 4000)
     private String intro;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "GUIDE_RANK")
     private GuideRank rank;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "GUIDE_WARNING")
     private Warning warning;
 

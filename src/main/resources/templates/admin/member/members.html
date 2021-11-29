@@ -71,7 +71,7 @@
                      aria-label="Previous">
                     <span aria-hidden="true">&lt;</span>
                   </a>
-                </li><!-- /이전 페이지로 가기 버튼 -->
+                </li><!-- /이전 페이지 -->
                 <!-- ** 1,2,3,4,... 페이지 -->
                 <li th:each="page: ${#numbers.sequence(start, last)}"
                     th:class="${page == members.number + 1} ? 'active'">
@@ -85,12 +85,12 @@
                     <span aria-hidden="true">&gt;</span>
                   </a>
                 </li><!--/다음 페이지 -->
-                <!-- ** 마지막 페이지로 이동 -->
+                <!-- ** 마지막 페이지 -->
                 <li>
                   <a th:href="${lastAddr}" aria-label="Last">
                     <span aria-hidden="true">Last</span>
                   </a>
-                </li><!-- /마지막 페이지로 이동 -->
+                </li><!-- /마지막 페이지 -->
               </th:block>
             </ul>
           </div>

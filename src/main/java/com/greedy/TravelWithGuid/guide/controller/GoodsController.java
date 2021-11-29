@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.guide.controller;
 
-import com.greedy.TravelWithGuid.guide.model.dto.GoodsDTO;
+import com.greedy.TravelWithGuid.guide.model.dto.EditGoodsDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
 import com.greedy.TravelWithGuid.guide.service.GoodsService;
@@ -31,7 +31,7 @@ public class GoodsController {
     }
 
     @PostMapping("/editGoods")
-    public String editFileUpload(@RequestParam("file") List<MultipartFile> multipartFile, @ModelAttribute GoodsDTO dto,
+    public String editFileUpload(@RequestParam("file") List<MultipartFile> multipartFile, @ModelAttribute EditGoodsDTO dto,
                                  @RequestParam(required = false) List<String> optionName, @RequestParam(required = false) List<String> optionPrice,
                                  Principal principal, Model model) throws IOException {
         System.out.println("multipartFile = " + multipartFile);

@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.guide.service.impl;
 
-import com.greedy.TravelWithGuid.guide.model.dto.GoodsDTO;
+import com.greedy.TravelWithGuid.guide.model.dto.EditGoodsDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Attachment;
 import com.greedy.TravelWithGuid.guide.model.entity.Goods;
 import com.greedy.TravelWithGuid.guide.model.entity.GoodsOption;
@@ -32,7 +32,7 @@ public class GoodsServiceImpl implements GoodsService {
     private final AttachmentRepository attachmentRepository;
 
     @Override
-    public boolean goodsFileUpload(List<MultipartFile> multipartFile, GoodsDTO dto, List<String> optionName, List<String> optionPrice, Guide guide) {
+    public boolean goodsFileUpload(List<MultipartFile> multipartFile, EditGoodsDTO dto, List<String> optionName, List<String> optionPrice, Guide guide) {
         Goods goods = Goods.builder()
                 .guide(guide)
                 .title(dto.getTitle())

@@ -8,9 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,4 +34,20 @@ public class adminController {
         }
         return "admin/member/members";
     }
+
+    /******************************************************
+     * GUIDE
+     *****************************************************/
+    @GetMapping("/guides")
+    public String guides(Model model, @RequestParam(value = "word", required = false) String word,
+                         @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        model.addAttribute("word", word);
+        model.addAttribute("guides", guideService.getGuides(word, pageable));
+
+        if (StringUtils.hasText(word) && !paging) {
+            return "admin/guide/guides :: #guideTable";
+        }
+        return "admin/guide/guides";
+    }
+
 }

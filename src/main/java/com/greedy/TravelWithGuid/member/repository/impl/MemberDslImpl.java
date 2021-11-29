@@ -45,6 +45,7 @@ public class MemberDslImpl implements MemberDsl {
         if (StringUtils.hasText(word)) {
             builder.and(
                     (member.id.stringValue().containsIgnoreCase(word))
+                            .or(member.email.stringValue().containsIgnoreCase(word))
                             .or(member.nickname.stringValue().containsIgnoreCase(word))
                             .or(member.phone.stringValue().containsIgnoreCase(word))
             );

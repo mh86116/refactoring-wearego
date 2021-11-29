@@ -16,4 +16,4 @@ spring:
         # 디버깅이 용이하도록 SQL 문 이외에 추가적인 정보를 출력해 준다.
         use_sql_comments: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
