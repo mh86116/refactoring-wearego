@@ -34,8 +34,6 @@ public class GoodsController {
     public String editFileUpload(@RequestParam("file") List<MultipartFile> multipartFile, @ModelAttribute EditGoodsDTO dto,
                                  @RequestParam(required = false) List<String> optionName, @RequestParam(required = false) List<String> optionPrice,
                                  Principal principal, Model model) throws IOException {
-        System.out.println("multipartFile = " + multipartFile);
-        System.out.println("dto = " + dto.getBody());
 
         Guide guide = guideId(principal.getName());
         boolean result = goodsService.goodsFileUpload(multipartFile, dto, optionName, optionPrice, guide);

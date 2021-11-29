@@ -21,9 +21,7 @@
                                 <th class="table-th"><i class=" fa fa-edit"></i>은행</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>계좌번호</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>소개/경력기술</th>
-                                <th class="table-th"><i class=" fa fa-edit"></i>등급</th>
-                                <th class="table-th"><i class=" fa fa-edit"></i>경고횟수</th>
-                                <th class="table-th"><i class=" fa fa-edit"></i>가입날짜</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>신청날짜</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>수정</th>
                             </tr>
                             </thead>
@@ -35,8 +33,6 @@
                                 <td th:text="${list.bank}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.account}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
-                                <td th:text="${list.rank}" style="vertical-align: middle;"></td>
-                                <td th:text="${list.warning}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
                                 <td style="vertical-align: middle;" >
                                     <button class="btn" onclick="processMember(this)">등업</button>
@@ -50,8 +46,7 @@
                             <div class="form-group">
                                 <label for="searchKeyword" class="search-label">
                                     <input class="input-txt" th:value="${word}" id="searchKeyword" name="word" placeholder="번호, 이름으로 조회" ></label>
-                                <button class="btn btn-send" onclick="searchGuide()">검색</button>
-                                <input hidden th:value="guide" name="guide">
+                                <button class="btn btn-send" onclick="searchGuides()">검색</button>
                             </div>
                         </form>
 

@@ -18,7 +18,9 @@ public class adminController {
     private final GuideService guideService;
 
     @GetMapping("/")
-    public String adminMain() { return "admin/cmmn/main"; }
+    public String adminMain() {
+        return "admin/cmmn/main";
+    }
 
     /******************************************************
      * MEMBER
@@ -41,13 +43,27 @@ public class adminController {
     @GetMapping("/guides")
     public String guides(Model model, @RequestParam(value = "word", required = false) String word,
                          @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        boolean name = true;
         model.addAttribute("word", word);
-        model.addAttribute("guides", guideService.getGuides(word, pageable));
-
+        model.addAttribute("guides", guideService.getGuides(word, pageable, true));
         if (StringUtils.hasText(word) && !paging) {
             return "admin/guide/guides :: #guideTable";
+        } else {
+            return "admin/guide/guides";
         }
-        return "admin/guide/guides";
+    }
+
+    @GetMapping("/waitingGuides")
+    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
+                         @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        boolean name = false;
+        model.addAttribute("word", word);
+        model.addAttribute("guides", guideService.getGuides(word, pageable, false));
+        if (StringUtils.hasText(word) && !paging) {
+            return "admin/guide/waitingGuides :: #guideTable";
+        } else {
+            return "admin/guide/waitingGuides";
+        }
     }
 
 }

@@ -4,16 +4,14 @@ import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
 import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Table(name = "GUIDE")

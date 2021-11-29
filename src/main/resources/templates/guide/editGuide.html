@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/layout}" lang="ko">
+<body layout:fragment="content">
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="/main/img/sr/elephant.jpg" width="1900" height="300" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>MY PAGE</h2>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">APPLICATION FOR GUIDE</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / catg header banner section -->
+
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">
+                    <div class="row-middle">
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-register">
+                                <h4>가이드 신청</h4>
+                                <div class="aa-center">
+                                    <form th:action="@{/guide/editGuide}" method="post" encType="multipart/form-data">
+                                        <table class="aa-login-form">
+                                            <tr>
+                                                <td rowspan="2" id="titleImgArea">
+                                                    <img id="titleImg" width="200" height="200"
+                                                         onclick="document.getElementById('thumbnailImg1').click();">
+                                                </td>
+                                                <td height="50"><label><strong>이름</strong>
+                                                    <input type="text" name="name">
+                                                </label></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50"><label><strong>이메일</strong>
+                                                    <input type="text" name="email">
+                                                </label></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50"><label style="padding-right: 25px;"><strong>은행명</strong>
+                                                    <input type="text" name="bank">
+                                                </label></td>
+                                                <td height="50"><label><strong>계좌번호</strong>
+                                                    <input type="text" name="account">
+                                                </label></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50"><strong>공인언어자격증</strong></td>
+                                                <td height="50"><strong>주민등록사본</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="contentImgArea1" style="width: 150px;">
+                                                    <img id="contentImg1" width="150" height="150"
+                                                         onclick="document.getElementById('thumbnailImg2').click();">
+                                                </td>
+                                                <td id="contentImgArea2" style="width: 150px;">
+                                                    <img id="contentImg2" width="150" height="150"
+                                                         onclick="document.getElementById('thumbnailImg3').click();">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" height="50"><strong>경력 및 자기소개</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><pre style="background-color: transparent; border: none;">
+                                                    <textarea name="intro" rows="10" cols="65" style="resize: none;"></textarea></pre>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div style="text-align: center;">
+                                            <button type="submit" class="aa-browse-btn" id="guideSignup">신청하기</button>
+                                            <button type="reset" class="aa-browse-btn"
+                                                    style="background-color: #ffffff; color:#ff6666">취소하기
+                                            </button>
+                                        </div>
+                                        <div class="thumbnail-file-area">
+                                            <input type="file" id="thumbnailImg1" name="file"
+                                                   onchange="loadImg(this, 1)">
+                                            <input type="file" id="thumbnailImg2" name="file"
+                                                   onchange="loadImg(this, 2)">
+                                            <input type="file" id="thumbnailImg3" name="file"
+                                                   onchange="loadImg(this, 3)">
+                                        </div>
+                                        <br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function loadImg(value, num) {
+        if (value.files && value.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (ev) {
+                switch (num) {
+                    case 1:
+                        document.getElementById('titleImg').src = ev.target.result;
+                        break;
+                    case 2:
+                        document.getElementById('contentImg1').src = ev.target.result;
+                        break;
+                    case 3:
+                        document.getElementById('contentImg2').src = ev.target.result;
+                        break;
+                }
+            };
+            reader.readAsDataURL(value.files[0]);
+        }
+    }
+</script>
+</body>
+</html>

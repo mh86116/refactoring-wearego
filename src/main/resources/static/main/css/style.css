@@ -4475,3 +4475,8 @@ img {
 .summerPrice{width: 80px; border:1px solid #357ebd; border-radius: 5px;}
 .summerOption{width: 150px; border:1px solid #357ebd; border-radius: 5px;}
 .summerBtn{display: inline-block; border-radius: 5px; border: none; height: 30px; color: white; background-color: #ff6666; font-size: 14px; cursor: pointer;}
+
+/* guide */
+#thumbnailImg1{display: none;}
+#thumbnailImg2{display: none;}
+#thumbnailImg3{display: none;}

@@ -70,12 +70,11 @@ public class GoodsServiceImpl implements GoodsService {
              * image save
              ******************************************************************/
             for (MultipartFile file : multipartFile) {
-                System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
                 int dot = Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".");
                 String ext = file.getOriginalFilename().substring(dot);
                 String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
-                File filePath = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload");
+                File filePath = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload/goods");
                 if (!filePath.exists()) {
                     System.out.println("폴더 생성 = " + filePath.mkdirs());
                 }
