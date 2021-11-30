@@ -2,6 +2,7 @@ package com.greedy.TravelWithGuid.member.model.entity;
 
 
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
+import com.greedy.TravelWithGuid.member.model.enums.Role;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
@@ -43,4 +44,8 @@ public class Member extends BaseTimeRegisterEntity implements Persistable<Long> 
         return getCreatedDt() == null;
     }
 
+    public void patchMemberGuide(Long id) {
+        this.id = id;
+        this.authority = Role.GUIDE.getValue();
+    }
 }

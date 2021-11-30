@@ -30,7 +30,6 @@ function processMember() {
     let dto = {
         no: $('#no').text()
     };
-    console.log(dto.no);
 
     $.ajax({
         beforeSend: function (xhr) {

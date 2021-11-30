@@ -9,6 +9,7 @@ import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
+import com.greedy.TravelWithGuid.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GuideServiceImpl implements GuideService {
     private final GuideRepository guideRepository;
+//    private final GuideHistoryRepository guideHistoryRepository;
+    private final MemberRepository memberRepository;
     private final AttachmentRepository attachmentRepository;
 
     @Override
@@ -51,6 +54,21 @@ public class GuideServiceImpl implements GuideService {
                 .isEnable(false)
                 .build();
         guideRepository.save(guide);
+//        GuideHistory gHistory = GuideHistory.builder()
+//                .guide(guide)
+//                .category(GuideCategory.BANK)
+//                .afterValue(guide.getBank())
+//                .category(GuideCategory.ACCOUNT)
+//                .afterValue(guide.getAccount())
+//                .category(GuideCategory.EMAIL)
+//                .afterValue(guide.getEmail())
+//                .category(GuideCategory.RANK)
+//                .afterValue(guide.getRank().getValue())
+//                .category(GuideCategory.WARNING)
+//                .afterValue(guide.getWarning().getValue())
+//                .build();
+//        guideHistoryRepository.save(gHistory);
+//        System.out.println("gHistory = " + gHistory);
         /*******************************************************************
          * image save
          ******************************************************************/
@@ -71,6 +89,7 @@ public class GuideServiceImpl implements GuideService {
 
                 Attachment attachment = Attachment.builder()
                         .category(PhotoCategory.GUIDE)
+                        .RefNo(guide.getId())
                         .originalName(file.getOriginalFilename())
                         .savedName(savedName)
                         .savePath(filePath.getPath())
@@ -86,4 +105,46 @@ public class GuideServiceImpl implements GuideService {
         return false;
     }
 
+    @Override
+    public void patchGuide(Long id) {
+        Guide dto = guideId(id);
+        dto.patchGuide(dto.getId());
+//        GuideHistory gHistory = GuideHistory.builder()
+        guideRepository.save(dto);
+//
+//                .build();
+        Member member = memberId(id);
+        member.patchMemberGuide(member.getId());
+        memberRepository.save(member);
+        Attachment attachment = attachmentByRefNo(id);
+        attachment.patchGuide(attachment.getId());
+        attachmentRepository.save(attachment);
+        System.out.println("dto = " + dto);
+        System.out.println("member = " + member);
+        System.out.println("attachment = " + attachment);
+
+    }
+
+    @Override
+    public String getReject(Long id) {
+        return null;
+    }
+
+
+    /**********************************************
+     * 공통로직
+     **********************************************/
+    public Member memberId(Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다. guideId = " + id));
+    }
+
+    public Guide guideId(Long id) {
+        return guideRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다. guideId = " + id));
+    }
+
+    public Attachment attachmentByRefNo(Long id) {
+        return attachmentRepository.findByRefNo(id);
+    }
 }

@@ -4449,23 +4449,23 @@ img {
 .input-guide{height: 35px; border-radius: 5px; border: 1px solid silver;}
 
 /* 자주하는 질문 */
-.accordion {font-family:Arial, Helvetica, sans-serif; font-size:14px; border:1px solid #542437; border-radius:10px; width:800px; padding:10px; background:#fff; text-align:center; margin-left:10cm; margin-top:2cm;}
+.accordion { font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding: 10px; background: #fff;}
 .accordion ul {list-style:none;}
 .accordion li {margin:0; padding:0;}
 .accordion [type=radio], .accordion [type=checkbox] {display:none;}
-.accordion label {display:block; font-size:16px; line-height:16px; background:#D95B43; border:1px solid #542437; color:#542437; text-shadow:1px 1px 1px rgba(255,255,255,0.3); font-weight:700; cursor:pointer; text-transform:uppercase; -webkit-transition: all .2s ease-out; -moz-transition: all .2s ease-out;}
-.accordion ul li label:hover, .accordion [type=radio]:checked ~ label, .accordion [type=checkbox]:checked ~ label {background:#C02942; color:#FFF; text-shadow:1px 1px 1px rgba(0,0,0,0.5)}
-.accordion .content {padding:0 10px; overflow:hidden; border:1px solid #fff; -webkit-transition: all .5s ease-out; -moz-transition: all .5s ease-out;}
-.accordion p {color:#333; margin:0 0 10px;}
+.accordion label {display: block; font-size: 20px; border-top: 1px solid black; margin-right: 5px; margin-top: 5px; margin-left: 5px; font-weight: 700; cursor: pointer; text-transform: uppercase; -webkit-transition: all .2s ease-out;}
+/*.accordion ul li label:hover, .accordion [type=radio]:checked ~ label, .accordion [type=checkbox]:checked ~ label { color:#FFF; text-shadow:1px 1px 1px rgba(0,0,0,0.5)}*/
+.accordion .content {overflow:hidden; border:1px solid #fff; -webkit-transition: all .5s ease-out; -moz-transition: all .5s ease-out;}
+.accordion p {margin:10px;}
 .accordion h3 {color:#542437; padding:0; margin:10px 0;}
 
 /* Vertical */
 .vertical ul li {overflow:hidden; margin:0 0 1px;}
 .vertical ul li label {padding:10px;}
 .vertical [type=radio]:checked ~ label, .vertical [type=checkbox]:checked ~ label {border-bottom:0;}
-.vertical ul li label:hover {border:1px solid #542437;}
+.vertical ul li label:hover {background:lightcoral; color:#FFF; text-shadow:1px 1px 1px rgba(0,0,0,0.5)}
 .vertical ul li .content {height:0; border-top:0;}
-.vertical [type=radio]:checked ~ label ~ .content, .vertical [type=checkbox]:checked ~ label ~ .content {height:300px; border:1px solid #542437;}
+.vertical [type=radio]:checked ~ label ~ .content, .vertical [type=checkbox]:checked ~ label ~ .content {height: auto; margin: 5px;}
 
 
 /* summernote */

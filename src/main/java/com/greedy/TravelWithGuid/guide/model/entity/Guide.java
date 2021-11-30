@@ -4,6 +4,7 @@ import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
 import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
+import com.greedy.TravelWithGuid.member.model.enums.Role;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
@@ -56,4 +57,13 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
 
     @Override
     public boolean isNew() { return getCreatedDt() == null; }
+
+    public void patchGuide(Long id) {
+        this.id = id;
+        this.rank = GuideRank.SILVER;
+        this.warning = Warning.BASIC;
+        this.approvalYn = true;
+        this.isEnable = true;
+
+    }
 }

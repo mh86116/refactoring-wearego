@@ -1,5 +1,6 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeModifyEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "GUIDE_HISTORY")
-public class GuideHistory implements Persistable<Long> {
+public class GuideHistory extends BaseTimeModifyEntity implements Persistable<Long> {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_NO")
     private Long id;
@@ -33,7 +34,7 @@ public class GuideHistory implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return getGuide().isNew();
+        return getCreatedDt() == null;
     }
 
 

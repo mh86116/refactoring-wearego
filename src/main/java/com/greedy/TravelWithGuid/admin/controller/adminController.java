@@ -1,6 +1,7 @@
 package com.greedy.TravelWithGuid.admin.controller;
 
 import com.greedy.TravelWithGuid.guide.service.GuideService;
+import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -63,6 +64,18 @@ public class adminController {
             return "admin/guide/waitingGuides :: #guideTable";
         } else {
             return "admin/guide/waitingGuides";
+        }
+    }
+
+    @ResponseBody
+    @PatchMapping("/guide/{id}")
+    public String patchGuide(@PathVariable Long id, @RequestParam(required = false) String value) {
+        System.out.println("value = " + value);
+        if (value.equals("approval")) {
+        guideService.patchGuide(id);
+            return "ok";
+        } else {
+            return guideService.getReject(id);
         }
     }
 

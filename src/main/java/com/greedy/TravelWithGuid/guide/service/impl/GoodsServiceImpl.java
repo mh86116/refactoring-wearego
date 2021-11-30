@@ -85,6 +85,7 @@ public class GoodsServiceImpl implements GoodsService {
 
                     Attachment attachment = Attachment.builder()
                             .category(PhotoCategory.GOODS)
+                            .RefNo(goods.getId())
                             .originalName(file.getOriginalFilename())
                             .savedName(savedName)
                             .savePath(filePath.getPath())

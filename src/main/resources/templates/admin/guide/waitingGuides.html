@@ -15,14 +15,15 @@
                         <table class="display table table-bordered" id="hidden-table-info" style="text-align: center; vertical-align: middle;">
                             <thead>
                             <tr>
-                                <th class="table-th"><i class="fa fa-bullhorn"></i>가이드번호</th>
+                                <th class="table-th"><i class="fa fa-bullhorn"></i>신청번호</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>E-MAIL</th>
                                 <th class="table-th"><i class="fa fa-bookmark"></i>이름</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>은행</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>계좌번호</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>소개/경력기술</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>신청날짜</th>
-                                <th class="table-th"><i class=" fa fa-edit"></i>수정</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>등업</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>반려</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,7 +36,10 @@
                                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
                                 <td style="vertical-align: middle;" >
-                                    <button class="btn" onclick="processMember(this)">등업</button>
+                                    <button class="btn" onclick="processGuide('approval',this)">승인</button>
+                                </td>
+                                <td style="vertical-align: middle;" >
+                                    <button class="btn" onclick="processGuide('reject')">반려</button>
                                 </td>
                             </tr>
                             </tbody>

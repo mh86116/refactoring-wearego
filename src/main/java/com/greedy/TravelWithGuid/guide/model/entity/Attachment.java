@@ -23,6 +23,9 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     @Column(name = "CATEGORY_")
     private PhotoCategory category;
 
+    @Column(name = "Ref_NO")
+    private Long RefNo;
+
     @Column(name = "ORIGINAL_NAME")
     private String originalName;
 
@@ -38,5 +41,10 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     @Override
     public boolean isNew() {
         return getCreatedDt() == null;
+    }
+
+    public void patchGuide(Long id) {
+        this.id = id;
+        this.isEnable = true;
     }
 }

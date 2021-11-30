@@ -14,4 +14,7 @@ public interface GuideService {
 
     boolean getGuideSignUp(List<MultipartFile> multipartFileList, EditGuideDTO dto, Member guide);
 
+    void patchGuide(Long id);
+
+    String getReject(Long id);
 }
