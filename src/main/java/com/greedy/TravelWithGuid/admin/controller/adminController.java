@@ -66,4 +66,13 @@ public class adminController {
         }
     }
 
+    /******************************************************
+     * BOARD
+     *****************************************************/
+    @GetMapping("/board/beginner")
+    public String beginner() { return "admin/board/beginner"; }
+
+    @GetMapping("/board/questions")
+    public String questions() { return "admin/board/questions"; }
+
 }
