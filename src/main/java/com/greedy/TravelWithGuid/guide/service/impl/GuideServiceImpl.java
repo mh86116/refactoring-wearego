@@ -30,7 +30,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GuideServiceImpl implements GuideService {
     private final GuideRepository guideRepository;
-//    private final GuideHistoryRepository guideHistoryRepository;
+    //    private final GuideHistoryRepository guideHistoryRepository;
     private final MemberRepository memberRepository;
     private final AttachmentRepository attachmentRepository;
 
@@ -69,40 +69,44 @@ public class GuideServiceImpl implements GuideService {
 //                .build();
 //        guideHistoryRepository.save(gHistory);
 //        System.out.println("gHistory = " + gHistory);
-        /*******************************************************************
-         * image save
-         ******************************************************************/
-        for (MultipartFile file : multipartFileList) {
-            int dot = Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".");
-            String ext = file.getOriginalFilename().substring(dot);
-            String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+        if (!guide.isNew()) {
 
-            File filePath = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload/guide");
-            if (!filePath.exists()) {
-                System.out.println("폴더 생성 = " + filePath.mkdirs());
+            /*******************************************************************
+             * image save
+             ******************************************************************/
+            for (MultipartFile file : multipartFileList) {
+                int dot = Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".");
+                String ext = file.getOriginalFilename().substring(dot);
+                String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+                File filePath = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload/guide");
+                if (!filePath.exists()) {
+                    System.out.println("폴더 생성 = " + filePath.mkdirs());
+                }
+
+                File filePath2 = new File(filePath + "/" + savedName);
+                try {
+                    FileOutputStream newFilePath = new FileOutputStream(filePath2, true);
+                    newFilePath.write(file.getBytes());
+
+                    Attachment attachment = Attachment.builder()
+                            .category(PhotoCategory.GUIDE)
+                            .RefNo(guide.getId())
+                            .originalName(file.getOriginalFilename())
+                            .savedName(savedName)
+                            .savePath(filePath.getPath())
+                            .isEnable(false)
+                            .build();
+                    attachmentRepository.save(attachment);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
-
-            File filePath2 = new File(filePath + "/" + savedName);
-            try {
-                FileOutputStream newFilePath = new FileOutputStream(filePath2, true);
-                newFilePath.write(file.getBytes());
-
-                Attachment attachment = Attachment.builder()
-                        .category(PhotoCategory.GUIDE)
-                        .RefNo(guide.getId())
-                        .originalName(file.getOriginalFilename())
-                        .savedName(savedName)
-                        .savePath(filePath.getPath())
-                        .isEnable(false)
-                        .build();
-                attachmentRepository.save(attachment);
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override

@@ -92,7 +92,6 @@ public class GoodsServiceImpl implements GoodsService {
                             .isEnable(false)
                             .build();
                     attachmentRepository.save(attachment);
-                    System.out.println("attachment = " + attachment);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
