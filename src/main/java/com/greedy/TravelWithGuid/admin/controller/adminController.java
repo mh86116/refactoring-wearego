@@ -70,7 +70,6 @@ public class adminController {
     @ResponseBody
     @PatchMapping("/guide/{id}")
     public String patchGuide(@PathVariable Long id, @RequestParam(required = false) String value) {
-        System.out.println("value = " + value);
         if (value.equals("approval")) {
         guideService.patchGuide(id);
             return "ok";

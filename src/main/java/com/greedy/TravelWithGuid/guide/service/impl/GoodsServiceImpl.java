@@ -53,10 +53,8 @@ public class GoodsServiceImpl implements GoodsService {
             String price = "";
             for (int i = 0; i < optionName.size(); i++) {
                 name = optionName.get(i);
-                System.out.println("name = " + name);
                 for (int j = 0; j < optionPrice.size(); j++) {
                     price = optionPrice.get(i);
-                    System.out.println("price = " + price);
                 }
                 GoodsOption option = GoodsOption.builder()
                         .goods(goods)

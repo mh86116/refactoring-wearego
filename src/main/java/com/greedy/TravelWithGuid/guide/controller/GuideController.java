@@ -30,7 +30,6 @@ public class GuideController {
     @PostMapping("/editGuide")
     public String signUpGuide(@RequestParam("file") List<MultipartFile> multipartFileList, @ModelAttribute EditGuideDTO dto,
                               Principal principal, Model model) {
-        System.out.println("multipartFileList = " + multipartFileList);
         Member member = memberId(principal.getName());
         boolean result = guideService.getGuideSignUp(multipartFileList, dto, member);
         if (result) {

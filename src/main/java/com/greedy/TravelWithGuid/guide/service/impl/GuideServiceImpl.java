@@ -101,7 +101,6 @@ public class GuideServiceImpl implements GuideService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
             return true;
         } else {
@@ -123,17 +122,12 @@ public class GuideServiceImpl implements GuideService {
         Attachment attachment = attachmentByRefNo(id);
         attachment.patchGuide(attachment.getId());
         attachmentRepository.save(attachment);
-        System.out.println("dto = " + dto);
-        System.out.println("member = " + member);
-        System.out.println("attachment = " + attachment);
-
     }
 
     @Override
     public String getReject(Long id) {
         return null;
     }
-
 
     /**********************************************
      * 공통로직
