@@ -5,9 +5,11 @@ import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface GuideRepository extends JpaRepository<Guide, Long>, GuideDsl {
     Guide findByEmail(String email);
 
     GuideDTO findByMemberId(Long id);
+
 }

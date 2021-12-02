@@ -55,6 +55,19 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
+    public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean b, boolean b1) {
+        return Guide.builder()
+                .name(name)
+                .email(email)
+                .bank(bank.replace(" ", ""))
+                .account(account)
+                .intro(intro)
+                .member(member)
+                .approvalYn(false)
+                .isEnable(false)
+                .build();
+    }
+
     @Override
     public boolean isNew() { return getCreatedDt() == null; }
 

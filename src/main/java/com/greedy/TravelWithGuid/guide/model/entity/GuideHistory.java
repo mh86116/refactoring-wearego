@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,13 +16,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "GUIDE_HISTORY")
 public class GuideHistory extends BaseTimeModifyEntity implements Persistable<Long> {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_NO")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "GUIDE_NO")
-    private Guide guide;
+    @Column(name = "REF_NO")
+    private Long refNo;
 
     @Column(name = "CATEGORY")
     private GuideCategory category;
@@ -32,9 +33,23 @@ public class GuideHistory extends BaseTimeModifyEntity implements Persistable<Lo
     @Column(name = "AFTER_VALUE")
     private String afterValue;
 
+    public static GuideHistory createHistory(String history1, GuideCategory types, Long id) {
+        return GuideHistory.builder()
+                .refNo(id)
+                .category(types)
+                .beforeValue(history1)
+                .build();
+    }
+
+
     @Override
     public boolean isNew() {
         return getCreatedDt() == null;
+    }
+
+    public void update(Guide guide) {
+        this.refNo = guide.getId();
+//        this.ca
     }
 
 

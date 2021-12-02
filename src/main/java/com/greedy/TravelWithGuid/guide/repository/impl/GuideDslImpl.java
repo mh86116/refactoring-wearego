@@ -38,7 +38,6 @@ public class GuideDslImpl implements GuideDsl {
         }
     }
 
-
     private List<Guide> selectApprovalGuide(String word, Pageable pageable, boolean name) {
         return queryFactory
                 .selectFrom(guide)

@@ -32,6 +32,17 @@ public class GoodsOption extends BaseTimeRegisterEntity implements Persistable<L
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
+    public static GoodsOption create(Goods goods, String name, String price) {
+        return GoodsOption.builder()
+                .goods(goods)
+                .optionName(name)
+                .optionPrice(price)
+                .isEnable(false)
+                .build();
+    }
+
     @Override
-    public boolean isNew() { return getCreatedDt() == null; }
+    public boolean isNew() {
+        return getCreatedDt() == null;
+    }
 }

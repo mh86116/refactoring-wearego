@@ -7,6 +7,8 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.EnumType.STRING;
 
 @Getter @Entity
@@ -24,7 +26,7 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     private PhotoCategory category;
 
     @Column(name = "Ref_NO")
-    private Long RefNo;
+    private Long refNo;
 
     @Column(name = "ORIGINAL_NAME")
     private String originalName;
@@ -38,13 +40,25 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
+    public static Attachment create(Long id, String originalFilename, String savedName, String path, String name) {
+        return Attachment.builder()
+                .refNo(id)
+                .category(PhotoCategory.valueOf(name))
+                .originalName(originalFilename)
+                .savedName(savedName)
+                .savePath(path)
+                .isEnable(false)
+                .build();
+    }
+
+    public void patchPhoto(Long id, boolean b) {
+        this.id = id;
+        this.isEnable = b;
+    }
+
     @Override
     public boolean isNew() {
         return getCreatedDt() == null;
     }
 
-    public void patchGuide(Long id) {
-        this.id = id;
-        this.isEnable = true;
-    }
 }

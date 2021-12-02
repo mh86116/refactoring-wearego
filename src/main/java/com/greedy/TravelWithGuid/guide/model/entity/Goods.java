@@ -48,6 +48,20 @@ public class Goods extends BaseTimeRegisterEntity implements Persistable<Long> {
     @Column(name = "IS_ENABLE")         //활성화
     private boolean isEnable;
 
+    public static Goods createGoods(Guide guide, String title, String price, String place, String startDt, String endDt, String person, String body, boolean b) {
+        return Goods.builder()
+                .guide(guide)
+                .title(title)
+                .price(Integer.valueOf(price))
+                .place(place)
+                .startDt(LocalDate.parse(startDt))
+                .endDt(LocalDate.parse(endDt))
+                .person(Integer.valueOf(person))
+                .body(body)
+                .isEnable(false)
+                .build();
+    }
+
     @Override
     public boolean isNew() { return getCreatedDt() == null; }
 }
