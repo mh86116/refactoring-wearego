@@ -41,15 +41,9 @@ public class GuideHistory extends BaseTimeModifyEntity implements Persistable<Lo
                 .build();
     }
 
-
     @Override
     public boolean isNew() {
         return getCreatedDt() == null;
-    }
-
-    public void update(Guide guide) {
-        this.refNo = guide.getId();
-//        this.ca
     }
 
 

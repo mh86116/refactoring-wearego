@@ -9,6 +9,7 @@ import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideHistoryRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
+import com.greedy.TravelWithGuid.guide.service.GuideHistoryService;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.guide.service.fileUploadService;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -29,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuideServiceImpl implements GuideService {
     private final fileUploadService uploadService;
+    private final GuideHistoryService guideHistoryService;
     private final GuideRepository guideRepository;
     private final GuideHistoryRepository guideHistoryRepository;
     private final MemberRepository memberRepository;
@@ -43,36 +46,22 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public boolean getGuideSignUp(List<MultipartFile> multipartFileList, EditGuideDTO dto, Member member) {
-
         try {
-        Guide guide = Guide.createGuide(dto.getName(), dto.getEmail(), dto.getBank(), dto.getAccount(), dto.getIntro(), member, false, false);
-        guideRepository.save(guide);
+            //Guide
+            Guide guide = Guide.createGuide(dto.getName(), dto.getEmail(), dto.getBank(), dto.getAccount(), dto.getIntro(), member, false, false);
+            guideRepository.save(guide);
+            //변경이력
+            guideHistoryService.getGuideSignUpHistory(guide.getEmail(), guide.getBank(), guide.getAccount(), guide.getRank(), guide.getWarning(), true, guide.getId());
+            //image
+            uploadService.fileUpload(multipartFileList, guide.getId(), "GUIDE");
 
-        List<String> history = new ArrayList<>();
-        history.add(dto.getEmail());
-        history.add(dto.getBank());
-        history.add(dto.getAccount().replace(" ", ""));
-        history.add(String.valueOf(guide.getRank()));
-        history.add(String.valueOf(guide.getWarning()));
-
-        List<GuideCategory> type = new ArrayList<>();
-        type.add(GuideCategory.EMAIL);
-        type.add(GuideCategory.BANK);
-        type.add(GuideCategory.ACCOUNT);
-        type.add(GuideCategory.RANK);
-        type.add(GuideCategory.WARNING);
-        //변경 이력
-            for (int i = 0; i <= history.size(); i++) {
-                GuideHistory history2 = GuideHistory.createHistory(history.get(i), type.get(i), guide.getId());
-                guideHistoryRepository.save(history2);
-            }
-        //image
-        uploadService.fileUpload(multipartFileList, guide.getId(), "GUIDE");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("e = " + e);
+            return true;
+        } catch (Exception e) {
+            log.error("guide save error!!! " + e);
+            return false;
         }
-        return false;
     }
+
 
     @Override
     public void patchGuide(Long id) {
@@ -89,10 +78,9 @@ public class GuideServiceImpl implements GuideService {
         for (Attachment photo : a) {
             Attachment attachment = patchGuides(photo.getId());
             attachment.patchPhoto(photo.getId(), true);
-        attachmentRepository.save(attachment);
+            attachmentRepository.save(attachment);
         }
     }
-
 
     @Override
     public String getReject(Long id) {

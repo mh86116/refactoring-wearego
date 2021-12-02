@@ -22,9 +22,9 @@ public class BaseTimeModifyEntity extends BaseTimeRegisterEntity {
     @LastModifiedBy
     private String updateBy;
 
-//    @PrePersist
-//    private void updateDate() {
-//        /* 로컬 컴퓨터의 현재 날짜와 시간 정보 */
-//        LocalDateTime currentDateTime = LocalDateTime.now();
-//    }
+    @PrePersist
+    private void updateDate() {
+        /* 로컬 컴퓨터의 현재 날짜와 시간 정보 */
+        LocalDateTime currentDateTime = LocalDateTime.now();
+    }
 }

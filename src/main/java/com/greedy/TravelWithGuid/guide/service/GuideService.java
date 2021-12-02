@@ -2,6 +2,7 @@ package com.greedy.TravelWithGuid.guide.service;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
+import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,5 @@ public interface GuideService {
     void patchGuide(Long id);
 
     String getReject(Long id);
+
 }

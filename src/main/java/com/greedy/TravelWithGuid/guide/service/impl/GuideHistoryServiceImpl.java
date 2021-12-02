@@ -3,11 +3,17 @@ package com.greedy.TravelWithGuid.guide.service.impl;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.model.entity.GuideHistory;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
+import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
+import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.guide.repository.GuideHistoryRepository;
 import com.greedy.TravelWithGuid.guide.service.GuideHistoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -16,56 +22,16 @@ public class GuideHistoryServiceImpl implements GuideHistoryService {
     private final GuideHistoryRepository historyRepository;
 
     @Override
-    public void createGuideHistory(Guide guide) {
-        GuideHistory history;
-        if (guide.getEmail() != null) {
-            history = GuideHistory.builder()
-                    .refNo(guide.getId())
-                    .category(GuideCategory.EMAIL)
-                    .afterValue(guide.getEmail())
-                    .build();
-            historyRepository.save(history);
-        }
-        if (guide.getBank() != null) {
-            history = GuideHistory.builder()
-                    .refNo(guide.getId())
-                    .category(GuideCategory.BANK)
-                    .afterValue(guide.getBank())
-                    .build();
-            historyRepository.save(history);
-        }
-        if (guide.getAccount() != null) {
-            history = GuideHistory.builder()
-                    .refNo(guide.getId())
-                    .category(GuideCategory.ACCOUNT)
-                    .afterValue(guide.getAccount())
-                    .build();
-            historyRepository.save(history);
-        }
-        if (guide.getWarning() != null) {
-            history = GuideHistory.builder()
-                    .refNo(guide.getId())
-                    .category(GuideCategory.WARNING)
-                    .afterValue(guide.getWarning().getValue())
-                    .build();
-            historyRepository.save(history);
-        }
-        if (guide.getRank() != null) {
-            history = GuideHistory.builder()
-                    .refNo(guide.getId())
-                    .category(GuideCategory.RANK)
-                    .afterValue(guide.getRank().getValue())
-                    .build();
-            historyRepository.save(history);
-        }
-        if (!guide.isApprovalYn()) {
-            history = GuideHistory.builder()
-                    .refNo(guide.getId())
-                    .category(GuideCategory.APPROVAL)
-                    .afterValue(String.valueOf(guide.isApprovalYn()))
-                    .build();
-            historyRepository.save(history);
+    public void getGuideSignUpHistory(String email, String bank, String account, GuideRank rank, Warning warning, boolean b, Long id) {
+        try {
+            List<String> list = List.of(email, bank, account, String.valueOf(rank), String.valueOf(warning), String.valueOf(false));
+            List<GuideCategory> categories = new ArrayList<>(Arrays.asList(GuideCategory.values()));
+            for (int i = 0; i < list.size(); i++) {
+                GuideHistory history = GuideHistory.createHistory(list.get(i), categories.get(i), id);
+                historyRepository.save(history);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            log.error("history save error!! " + e);
         }
     }
-
 }

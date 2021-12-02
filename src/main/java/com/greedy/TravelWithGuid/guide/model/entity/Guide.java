@@ -4,7 +4,6 @@ import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
 import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
-import com.greedy.TravelWithGuid.member.model.enums.Role;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
@@ -55,21 +54,18 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
-    public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean b, boolean b1) {
+    public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean approvalYn, boolean isEnable) {
         return Guide.builder()
                 .name(name)
                 .email(email)
                 .bank(bank.replace(" ", ""))
-                .account(account)
+                .account(account.replace(" ", ""))
                 .intro(intro)
                 .member(member)
-                .approvalYn(false)
-                .isEnable(false)
+                .approvalYn(approvalYn)
+                .isEnable(isEnable)
                 .build();
     }
-
-    @Override
-    public boolean isNew() { return getCreatedDt() == null; }
 
     public void patchGuide(Long id) {
         this.id = id;
@@ -77,6 +73,8 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
         this.warning = Warning.BASIC;
         this.approvalYn = true;
         this.isEnable = true;
-
     }
+
+    @Override
+    public boolean isNew() { return getCreatedDt() == null; }
 }

@@ -1,8 +1,9 @@
 package com.greedy.TravelWithGuid.guide.service;
 
-import com.greedy.TravelWithGuid.guide.model.entity.Guide;
+import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
+import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 
 public interface GuideHistoryService {
-    void createGuideHistory(Guide guide);
 
+    void getGuideSignUpHistory(String email, String bank, String account, GuideRank rank, Warning warning, boolean b, Long id);
 }

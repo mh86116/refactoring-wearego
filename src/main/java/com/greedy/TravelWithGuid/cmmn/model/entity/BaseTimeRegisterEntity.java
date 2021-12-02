@@ -26,9 +26,4 @@ public class BaseTimeRegisterEntity {
     @Column(name = "CREATE_BY", updatable = false)
     private String createBy;
 
-    @PrePersist
-    private void updateDate() {
-        /* 로컬 컴퓨터의 현재 날짜와 시간 정보 */
-        LocalDateTime currentDateTime = LocalDateTime.now();
-    }
 }

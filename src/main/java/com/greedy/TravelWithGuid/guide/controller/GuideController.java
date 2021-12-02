@@ -1,6 +1,7 @@
 package com.greedy.TravelWithGuid.guide.controller;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
+import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.repository.MemberRepository;
@@ -29,7 +30,6 @@ public class GuideController {
     @PostMapping("/editGuide")
     public String signUpGuide(@RequestParam(value = "file", required = false) List<MultipartFile> multipartFileList, @ModelAttribute EditGuideDTO dto,
                               Principal principal, Model model) {
-        System.out.println("dto = " + dto);
         Member member = memberId(principal.getName());
 
         boolean result = guideService.getGuideSignUp(multipartFileList, dto, member);
