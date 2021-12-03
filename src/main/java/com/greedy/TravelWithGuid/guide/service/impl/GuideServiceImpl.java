@@ -5,7 +5,6 @@ import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Attachment;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.model.entity.GuideHistory;
-import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideHistoryRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
@@ -22,8 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -51,7 +48,7 @@ public class GuideServiceImpl implements GuideService {
             Guide guide = Guide.createGuide(dto.getName(), dto.getEmail(), dto.getBank(), dto.getAccount(), dto.getIntro(), member, false, false);
             guideRepository.save(guide);
             //변경이력
-            guideHistoryService.getGuideSignUpHistory(guide.getEmail(), guide.getBank(), guide.getAccount(), guide.getRank(), guide.getWarning(), true, guide.getId());
+            guideHistoryService.getGuideSignUpHistory(guide.getEmail(), guide.getBank(), guide.getAccount(), guide.getId());
             //image
             uploadService.fileUpload(multipartFileList, guide.getId(), "GUIDE");
 

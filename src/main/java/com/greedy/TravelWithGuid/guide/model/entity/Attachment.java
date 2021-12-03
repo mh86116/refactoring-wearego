@@ -25,7 +25,7 @@ public class Attachment extends BaseTimeRegisterEntity implements Persistable<Lo
     @Column(name = "CATEGORY_")
     private PhotoCategory category;
 
-    @Column(name = "Ref_NO")
+    @Column(name = "REF_NO")
     private Long refNo;
 
     @Column(name = "ORIGINAL_NAME")

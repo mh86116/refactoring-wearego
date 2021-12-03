@@ -22,9 +22,9 @@ public class GuideHistoryServiceImpl implements GuideHistoryService {
     private final GuideHistoryRepository historyRepository;
 
     @Override
-    public void getGuideSignUpHistory(String email, String bank, String account, GuideRank rank, Warning warning, boolean b, Long id) {
+    public void getGuideSignUpHistory(String email, String bank, String account, Long id) {
         try {
-            List<String> list = List.of(email, bank, account, String.valueOf(rank), String.valueOf(warning), String.valueOf(false));
+            List<String> list = List.of(email, bank, account);
             List<GuideCategory> categories = new ArrayList<>(Arrays.asList(GuideCategory.values()));
             for (int i = 0; i < list.size(); i++) {
                 GuideHistory history = GuideHistory.createHistory(list.get(i), categories.get(i), id);

@@ -17,4 +17,5 @@ public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
 
     @Query("select a from Attachment a where a.refNo = :id")
     List<Attachment> RefNo(@Param("id") Long id);
+
 }

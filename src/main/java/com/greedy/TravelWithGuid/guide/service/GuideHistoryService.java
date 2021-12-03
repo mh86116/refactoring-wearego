@@ -5,5 +5,5 @@ import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 
 public interface GuideHistoryService {
 
-    void getGuideSignUpHistory(String email, String bank, String account, GuideRank rank, Warning warning, boolean b, Long id);
+    void getGuideSignUpHistory(String email, String bank, String account, Long id);
 }

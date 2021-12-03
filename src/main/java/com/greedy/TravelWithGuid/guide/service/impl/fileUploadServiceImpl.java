@@ -17,27 +17,30 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class fileUploadServiceImpl implements fileUploadService {
-     private final AttachmentRepository attachmentRepository;
+    private final AttachmentRepository attachmentRepository;
 
     public void fileUpload(List<MultipartFile> multipartFileList, Long id, String name) {
         for (MultipartFile file : multipartFileList) {
             int dot = Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".");
             String ext = file.getOriginalFilename().substring(dot);
             String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
-                File filePath = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload");
-            File filePath2 = new File("");
+            File filePath1 = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload");
+            File filePath2 = null;
+            File filePath3 = null;
             if (name.equals("guide")) {
-            filePath2 = new File(filePath + "/guide" + "/" + savedName);
+                filePath2 = new File(filePath1 + "/guide" + "/" + savedName);
+                filePath3 = new File("/img/upload/guide" + "/" + savedName);
             } else {
-            filePath2 = new File(filePath + "/goods" + "/" + savedName);
+                filePath2 = new File(filePath1 + "/goods" + "/" + savedName);
+                filePath3 = new File("/img/upload/goods" + "/" + savedName);
             }
-            if (!filePath.exists()) {
-                System.out.println("폴더 생성 = " + filePath.mkdirs());
+            if (!filePath1.exists()) {
+                System.out.println("폴더 생성 = " + filePath1.mkdirs());
             }
             try {
                 FileOutputStream newFilePath = new FileOutputStream(filePath2, true);
                 newFilePath.write(file.getBytes());
-                Attachment attachment = Attachment.create(id, file.getOriginalFilename(), savedName, filePath.getPath(), name);
+                Attachment attachment = Attachment.create(id, file.getOriginalFilename(), savedName, filePath3.getPath(), name);
                 attachmentRepository.save(attachment);
 
             } catch (IOException e) {

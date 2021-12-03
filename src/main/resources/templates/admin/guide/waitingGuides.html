@@ -12,34 +12,36 @@
                 <!-- page start-->
                 <div class="content-panel">
                     <div class="adv-table" style="margin: 10px;" id="guideTable">
-                        <table class="display table table-bordered" id="hidden-table-info" style="text-align: center; vertical-align: middle;">
+                        <table class="display table table-bordered" id="hidden-table-info"
+                               style="text-align: center; vertical-align: middle;">
                             <thead>
                             <tr>
                                 <th class="table-th"><i class="fa fa-bullhorn"></i>신청번호</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>E-MAIL</th>
                                 <th class="table-th"><i class="fa fa-bookmark"></i>이름</th>
+                                <th class="table-th"><i class="fa fa-image"></i>사진</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>은행</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>계좌번호</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>소개/경력기술</th>
                                 <th class="table-th"><i class=" fa fa-edit"></i>신청날짜</th>
-                                <th class="table-th"><i class=" fa fa-edit"></i>등업</th>
-                                <th class="table-th"><i class=" fa fa-edit"></i>반려</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>승인여부</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="list : ${guides}">
                                 <td th:text="${list.id}" style="vertical-align: middle;" id="no"></td>
-                                <td th:text="${list.name}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.email}" style="vertical-align: middle;"></td>
+                                <td th:text="${list.name}" style="vertical-align: middle;"></td>
+                                <td th:text="${list.path}"></td>
                                 <td th:text="${list.bank}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.account}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
-                                <td style="vertical-align: middle;" >
-                                    <button class="btn" onclick="processGuide('approval',this)">승인</button>
-                                </td>
-                                <td style="vertical-align: middle;" >
-                                    <button class="btn" onclick="processGuide('reject')">반려</button>
+                                <td style="vertical-align: middle;">
+                                    <button class="btn btn-success btn-xs" onclick="processApprove('approval',this)"><i
+                                            class="fa fa-check"></i></button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"
+                                            data-target="#reject-modal"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                             </tbody>
@@ -49,10 +51,37 @@
                             <!-- Nm 검색 폼-->
                             <div class="form-group">
                                 <label for="searchKeyword" class="search-label">
-                                    <input class="input-txt" th:value="${word}" id="searchKeyword" name="word" placeholder="번호, 이름으로 조회" ></label>
+                                    <input class="input-txt" th:value="${word}" id="searchKeyword" name="word"
+                                           placeholder="번호, 이름으로 조회"></label>
                                 <button class="btn btn-send" onclick="searchGuides()">검색</button>
                             </div>
                         </form>
+
+                        <!--  Modal - Confirm -->
+                        <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body" align="center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <p align="center"> 가이드 승인을 거절하시겠습니까? </p>
+                                        <br>
+                                        <textarea class="form-control" rows="3" style=" height: 100px; resize: none;"
+                                                  name="reject" id="reject" placeholder="거절 사유를 작성해주세요."></textarea>
+                                        <br>
+                                        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"
+                                                onclick="processReject('reject',this)">확인
+                                        </button>
+                                        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">취소
+                                        </button>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / Modal - Confirm -->
 
                         <!-- 페이징 처리 -->
                         <ul class="dataTables_paginate paging_bootstrap pagination"

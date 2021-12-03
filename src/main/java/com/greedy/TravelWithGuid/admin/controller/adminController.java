@@ -1,7 +1,7 @@
 package com.greedy.TravelWithGuid.admin.controller;
 
+import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
-import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class adminController {
     private final MemberService memberService;
     private final GuideService guideService;
+    private final AttachmentRepository attachmentRepository;
 
     @GetMapping("/")
     public String adminMain() {
@@ -44,7 +45,6 @@ public class adminController {
     @GetMapping("/guides")
     public String guides(Model model, @RequestParam(value = "word", required = false) String word,
                          @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
-        boolean name = true;
         model.addAttribute("word", word);
         model.addAttribute("guides", guideService.getGuides(word, pageable, true));
         if (StringUtils.hasText(word) && !paging) {
@@ -57,7 +57,6 @@ public class adminController {
     @GetMapping("/waitingGuides")
     public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
                          @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
-        boolean name = false;
         model.addAttribute("word", word);
         model.addAttribute("guides", guideService.getGuides(word, pageable, false));
         if (StringUtils.hasText(word) && !paging) {
