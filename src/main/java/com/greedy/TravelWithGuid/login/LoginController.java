@@ -40,6 +40,14 @@ public class LoginController {
         return "cmmn/error";
     }
 
+    @GetMapping("/member/check")
+    public String check() {
+        return "member/memberCheck";
+    }
+
+    @PostMapping("/member/update")
+    public String update() { return "member/update"; }
+
     @GetMapping("/error")
     public String error() { return "cmmn/error"; }
 }

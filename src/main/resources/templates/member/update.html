@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/layout}" lang="ko">
+<body layout:fragment="content">
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="/main/img/sr/elephant.jpg" width="1900" height="300" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>MY PAGE</h2>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">EDIT</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">
+                    <div class="row-middle">
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-register">
+                                <h4>회원정보 수정</h4>
+                                <!-- TAB -->
+                                <ul class="nav nav-tabs aa-products-tab">
+                                    <li><a href="/member/update">회원정보수정</a></li>
+                                    <li><a href="/member/pwdUpdate">비밀번호변경</a></li>
+                                    <li><a href="/member/delete">회원탈퇴</a></li>
+                                </ul><!-- TAB 영역 끝 -->
+                                <div class="aa-center">
+                                    <form action="" class="aa-login-form" onreset="reset()" method="post">
+                                        <label for="">E-mail</label>
+                                        <input type="email" name="email" th:value="${#authentication.getName()}" readonly>
+                                        <label for="">닉네임</label>
+                                        <input type="text" name="nickname" id="nickname" th:value="${member.nickname}">
+                                        <label for="">핸드폰</label>
+                                        <input type="tel" name="phone" id="phone" th:value="${member.phone}">
+                                        <input type="hidden" id="memberNo" th:value="${member.id}">
+                                        <button type="button" class="aa-browse-btn" onclick="patchMember()">수정</button>
+                                        <button type="reset" class="aa-browse-btn">홈으로</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
