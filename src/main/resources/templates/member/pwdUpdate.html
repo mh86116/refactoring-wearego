@@ -27,24 +27,29 @@
                     <div class="row-middle">
                         <div class="col-md-6">
                             <div class="aa-myaccount-register">
-                                <h4>회원정보 수정</h4>
+                                <h4>비밀번호 변경</h4>
                                 <!-- TAB -->
                                 <ul class="nav nav-tabs aa-products-tab">
-                                    <li><a href="/member/update" id="update">회원정보수정</a></li>
+                                    <li><a href="/member/update">회원정보수정</a></li>
                                     <li><a href="/member/pwdUpdate">비밀번호변경</a></li>
                                     <li><a href="/member/delete">회원탈퇴</a></li>
                                 </ul><!-- TAB 영역 끝 -->
                                 <div class="aa-center">
-                                    <form action="" class="aa-login-form" >
-                                        <label for="">E-mail</label>
-                                        <input type="email" name="email" th:value="${member.email}" readonly>
-                                        <label for="">닉네임</label>
-                                        <input type="text" name="nickname" id="nickname" th:value="${member.nickname}">
-                                        <label for="">핸드폰</label>
-                                        <input type="tel" name="phone" id="phone" th:value="${member.phone}">
-                                        <input type="hidden" id="memberNo" th:value="${member.id}">
-                                        <button type="button" class="aa-browse-btn" onclick="patchMember()">수정</button>
-                                        <button type="reset" class="aa-browse-btn" >홈으로</button>
+                                    <form th:action="@{/member/pwdUpdate}" class="aa-login-form" onreset="reset()" onsubmit="return false;">
+                                        <label for="">아이디</label><input type="email" name="email"
+                                                                        th:value="${member.email}" readonly>
+                                        <label for="">변경 할 비밀번호</label><input type="password" id="pwd1" name="pwd"
+                                                                              required>
+                                        <label for="">비밀번호 확인</label><input type="password" id="pwd2" required>
+                                        <label><input hidden id="memberNo" th:value="${member.id}"></label>
+                                        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+                                        <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+
+
+                                        <div style="text-alian: center;">
+                                            <button type="submit" class="aa-browse-btn" onclick="pwdUpdate()">수정</button>
+                                            <button type="reset" class="aa-browse-btn">홈으로</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

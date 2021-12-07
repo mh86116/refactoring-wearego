@@ -1,13 +1,11 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
-import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.PhotoCategory;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
-
-import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -16,7 +14,7 @@ import static javax.persistence.EnumType.STRING;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ATTACHMENT")
-public class Attachment extends BaseTimeRegisterEntity implements Persistable<Long> {
+public class Attachment extends BaseTimeEntity implements Persistable<Long> {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ATTACHMENT_NO")
     private Long id;

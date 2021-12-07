@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
-import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
 import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Table(name = "GUIDE")
-public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
+public class Guide extends BaseTimeEntity implements Persistable<Long> {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GUIDE_NO")
@@ -53,6 +54,9 @@ public class Guide extends BaseTimeRegisterEntity implements Persistable<Long> {
 
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+    private List<Attachment> attachments;
 
     public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean approvalYn, boolean isEnable) {
         return Guide.builder()

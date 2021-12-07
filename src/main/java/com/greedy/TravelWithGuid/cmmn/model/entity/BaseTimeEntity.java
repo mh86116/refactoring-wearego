@@ -15,15 +15,9 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseTimeRegisterEntity {
+public class BaseTimeEntity {
 
     @CreatedDate
     @Column(name = "created_dt", updatable = false)
     private LocalDateTime createdDt;
-
-    @CreatedDate
-    @CreatedBy
-    @Column(name = "CREATE_BY", updatable = false)
-    private String createBy;
-
 }

@@ -1,5 +1,6 @@
 package com.greedy.TravelWithGuid.member.model.entity;
 
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseEntity;
 import com.greedy.TravelWithGuid.member.model.enums.MemberCategory;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "MEMBER_HISTORY")
-public class MemberHistory implements Persistable<Long> {
+public class MemberHistory extends BaseEntity implements Persistable<Long> {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_NO")
     private Long id;
@@ -29,8 +30,17 @@ public class MemberHistory implements Persistable<Long> {
     @Column(name = "AFTER_VALUE")
     private String afterValue;
 
+    public static MemberHistory updateMember(Member id, String value, MemberCategory type, String before) {
+        MemberHistory history = new MemberHistory();
+        history.member = id;
+        history.beforeValue = before;
+        history.category = (type != null) ? type : history.category;
+        history.afterValue = (value != null) ? value : history.getAfterValue();
+        return history;
+    }
+
     @Override
     public boolean isNew() {
-        return getMember().isNew();
+        return getUpdateDate() != null;
     }
 }

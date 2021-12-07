@@ -20,6 +20,7 @@ public class GuideDTO {
     private LocalDateTime createdDt;
     private String warning;
     private boolean isEnable;
+    private String imgUrl;
 
     @QueryProjection
     public GuideDTO(Guide guide) {
@@ -33,6 +34,7 @@ public class GuideDTO {
         this.warning = String.valueOf(guide.getWarning());
         this.createdDt = guide.getCreatedDt();
         this.isEnable = guide.isEnable();
+        this.imgUrl = guide.getAttachments().get(0).getSavePath();
     }
 
 }

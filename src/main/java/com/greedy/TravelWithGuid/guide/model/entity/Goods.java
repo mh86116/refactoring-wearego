@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
-import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeRegisterEntity;
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "GOODS")
-public class Goods extends BaseTimeRegisterEntity implements Persistable<Long> {
+public class Goods extends BaseTimeEntity implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GOODS_NO")       //상품 번호

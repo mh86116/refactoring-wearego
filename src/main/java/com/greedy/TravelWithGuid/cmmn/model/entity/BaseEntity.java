@@ -1,7 +1,6 @@
 package com.greedy.TravelWithGuid.cmmn.model.entity;
 
 import lombok.Getter;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,17 +13,15 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseTimeModifyEntity extends BaseTimeRegisterEntity {
+public class BaseEntity extends BaseTimeEntity {
     @LastModifiedDate
-    @Column(name = "updated_dt")
-    public LocalDateTime updateDt;
-
-    @LastModifiedBy
-    private String updateBy;
+    @Column(name = "UPDATE_DT")
+    private LocalDateTime updateDate;
 
     @PrePersist
-    private void updateDate() {
-        /* 로컬 컴퓨터의 현재 날짜와 시간 정보 */
-        LocalDateTime currentDateTime = LocalDateTime.now();
+    private void updateDate(){
+        if (this.updateDate == null) {
+            this.updateDate=this.getCreatedDt();
+        }
     }
 }
