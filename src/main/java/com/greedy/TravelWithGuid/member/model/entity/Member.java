@@ -57,6 +57,11 @@ public class Member extends BaseTimeEntity implements Persistable<Long> {
 
     public void patchPwdUpdate(Long id, String pwd) {
         this.id = id;
-        this.pwd = (pwd != null) ? pwd : this.pwd;
+        this.pwd = pwd;
+    }
+
+    public void delete(Long id, boolean isEnable) {
+        this.id = id;
+        this.isEnable = isEnable;
     }
 }

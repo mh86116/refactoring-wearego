@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MemberCheckDTO {
-//    private Long id;
+public class MemberDeleteDTO {
     private String email;
     private String pwd;
+    private String reason;
 }

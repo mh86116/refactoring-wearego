@@ -1,7 +1,9 @@
 package com.greedy.TravelWithGuid.member.service.impl;
 
 import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
+import com.greedy.TravelWithGuid.member.model.dto.MemberCheckDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDTO;
+import com.greedy.TravelWithGuid.member.model.dto.MemberDeleteDTO;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.model.entity.MemberHistory;
 import com.greedy.TravelWithGuid.member.model.enums.MemberCategory;
@@ -13,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,6 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final MemberHistoryRepository historyRepository;
     private final PasswordEncoder encoder;
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public Page<MemberDTO> getMembers(String word, Pageable pageable) {
@@ -34,6 +34,14 @@ public class MemberServiceImpl implements MemberService {
         pageable = PageRequest.of(page, 20);
         return memberRepository.getMembers(word, pageable);
     }
+
+    @Override
+    public boolean checkResult(MemberCheckDTO dto) {
+        Member member = findByEmail(dto.getEmail());
+        return encoder.matches(dto.getPwd(), member.getPwd());
+    }
+
+
 
     @Override
     public Member updateMember(String name) {
@@ -57,12 +65,23 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void patchPwdUpdate(Long id, String pwd) {
-        Member member = findMemberById(id);
         String pwdUpdate = encoder.encode(pwd);
-        if (!passwordEncoder.matches(member.getPwd(), pwdUpdate)) {
+        Member member = findMemberById(id);
         member.patchPwdUpdate(id, pwdUpdate);
         memberRepository.save(member);
+    }
+
+    @Override
+    public boolean delete(MemberDeleteDTO dto) {
+        Member member = findByEmail(dto.getEmail());
+        if (encoder.matches(dto.getPwd(), member.getPwd())) {
+            member.delete(member.getId(), false);
+            memberRepository.save(member);
+            MemberHistory history = MemberHistory.delete(member, "탈퇴", dto.getReason());
+            historyRepository.save(history);
+            return true;
         }
+        return false;
     }
 
     /********************************************
@@ -71,5 +90,9 @@ public class MemberServiceImpl implements MemberService {
     private Member findMemberById(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 회원입니다. memberId : " + id));
+    }
+
+    private Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 }

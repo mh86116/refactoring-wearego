@@ -57,9 +57,11 @@ function pwdUpdate() {
     var header = $("meta[name='_csrf_header']").attr("content");
 
     let no = $('#memberNo').val();
+    let pwd2 = $('#pwd2').val();
     let dto = {
         pwd: $('#pwd1').val()
     }
+    if (dto.pwd === pwd2) {
     $.ajax({
         beforeSend: function (xhr) {
             xhr.setRequestHeader(header, token)
@@ -75,6 +77,5 @@ function pwdUpdate() {
             alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
         }
     });
-
-
+    }
 }

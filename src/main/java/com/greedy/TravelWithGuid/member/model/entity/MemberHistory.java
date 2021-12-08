@@ -30,12 +30,24 @@ public class MemberHistory extends BaseEntity implements Persistable<Long> {
     @Column(name = "AFTER_VALUE")
     private String afterValue;
 
+    @Column(name = "REASON")
+    private String reason;
+
+
     public static MemberHistory updateMember(Member id, String value, MemberCategory type, String before) {
         MemberHistory history = new MemberHistory();
         history.member = id;
-        history.beforeValue = before;
+        history.beforeValue = (!before.equals(history.getBeforeValue())) ? before : null;
         history.category = (type != null) ? type : history.category;
-        history.afterValue = (value != null) ? value : history.getAfterValue();
+        history.afterValue = (!value.equals(history.getBeforeValue())) ? value : history.getAfterValue();
+        return history;
+    }
+
+    public static MemberHistory delete(Member id, String value, String reason) {
+        MemberHistory history = new MemberHistory();
+        history.member = id;
+        history.afterValue = value;
+        history.reason = reason;
         return history;
     }
 
