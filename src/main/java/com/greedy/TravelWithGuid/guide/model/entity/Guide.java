@@ -49,16 +49,13 @@ public class Guide extends BaseTimeEntity implements Persistable<Long> {
     @Column(name = "GUIDE_WARNING")
     private Warning warning;
 
-    @Column(name = "GUIDE_APPROVE")
-    private boolean approvalYn;
-
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
     private List<Attachment> attachments;
 
-    public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean approvalYn, boolean isEnable) {
+    public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean isEnable) {
         return Guide.builder()
                 .name(name)
                 .email(email)
@@ -66,7 +63,6 @@ public class Guide extends BaseTimeEntity implements Persistable<Long> {
                 .account(account.replace(" ", ""))
                 .intro(intro)
                 .member(member)
-                .approvalYn(approvalYn)
                 .isEnable(isEnable)
                 .build();
     }
@@ -75,7 +71,6 @@ public class Guide extends BaseTimeEntity implements Persistable<Long> {
         this.id = id;
         this.rank = GuideRank.SILVER;
         this.warning = Warning.BASIC;
-        this.approvalYn = true;
         this.isEnable = true;
     }
 

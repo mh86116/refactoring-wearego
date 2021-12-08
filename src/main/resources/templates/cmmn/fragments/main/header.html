@@ -82,6 +82,7 @@
                     <input type="password" placeholder="비밀번호를 입력하세요." id="pwd" name="password">
                     <!--                    <label for="rememberMe" class="all" aria-describedby="rememberMeHelp">-->
                     <!--                        <input type="checkbox" id="rememberMe" name="remember-me" checked>자동 로그인</label>-->
+                    <div th:if="${param.error}" style="color: red;">아이디 또는 비밀번호를 확인하세요</div>
                     <button class="aa-browse-btn" type="submit">로그인</button>
                     <br>
                     <p class="aa-lost-password"><a href="/login/findAccount">비밀번호를 잊었나요?</a></p>

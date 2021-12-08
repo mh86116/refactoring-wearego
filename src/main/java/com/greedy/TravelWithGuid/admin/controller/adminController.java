@@ -54,26 +54,50 @@ public class adminController {
         }
     }
 
-    @GetMapping("/waitingGuides")
-    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
-                         @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
-        model.addAttribute("word", word);
-        model.addAttribute("guides", guideService.getGuides(word, pageable, false));
-        if (StringUtils.hasText(word) && !paging) {
-            return "admin/guide/waitingGuides :: #guideTable";
-        } else {
-            return "admin/guide/waitingGuides";
-        }
-    }
+//    @GetMapping("/waitingGuides")
+//    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
+//                         @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+//        model.addAttribute("word", word);
+//        model.addAttribute("guides", guideService.getGuides(word, pageable, false));
+//        if (StringUtils.hasText(word) && !paging) {
+//            return "admin/guide/waitingGuides :: #guideTable";
+//        } else {
+//            return "admin/guide/waitingGuides";
+//        }
+//    }
 
     @ResponseBody
     @PatchMapping("/guide/{id}")
-    public String patchGuide(@PathVariable Long id, @RequestParam(required = false) String value) {
+    public String patchGuide(@PathVariable Long id, @RequestParam String value, @RequestParam(value = "reject", required = false) String reject) {
         if (value.equals("approval")) {
         guideService.patchGuide(id);
-            return "ok";
         } else {
-            return guideService.getReject(id);
+            guideService.getReject(id, reject);
+        }
+        return "ok";
+    }
+
+    @GetMapping("/waiteGuide")
+    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
+                              @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        model.addAttribute("word", word);
+        model.addAttribute("approval", guideService.getApproval(word, pageable, "SUBMIT"));
+        if (StringUtils.hasText(word) && !paging) {
+            return "admin/member/waiteGuide :: #memberTable";
+        } else {
+            return "admin/member/waiteGuide";
+        }
+    }
+
+    @GetMapping("/rejectGuide")
+    public String rejectGuide(Model model, @RequestParam(value = "word", required = false) String word,
+                              @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        model.addAttribute("word", word);
+        model.addAttribute("approval", guideService.getApproval(word, pageable, "REJECT"));
+        if (StringUtils.hasText(word) && !paging) {
+            return "admin/member/rejectGuide :: #memberTable";
+        } else {
+            return "admin/member/rejectGuide";
         }
     }
 

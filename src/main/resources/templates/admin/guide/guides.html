@@ -51,7 +51,7 @@
                                 <label for="searchKeyword" class="search-label">
                                     <input class="input-txt" th:value="${word}" id="searchKeyword" name="word" placeholder="번호, 이름으로 조회" ></label>
                                 <button class="btn btn-send" onclick="searchGuide()">검색</button>
-                                <input hidden th:value="guide" name="guide">
+                                <input hidden value="guide" name="guide" id="guides">
                             </div>
                         </form>
 

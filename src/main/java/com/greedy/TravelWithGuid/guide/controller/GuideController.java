@@ -42,7 +42,6 @@ public class GuideController {
             model.addAttribute("movePath", "/");
             return "cmmn/fail";
         }
-//        return null;
     }
 
     /************

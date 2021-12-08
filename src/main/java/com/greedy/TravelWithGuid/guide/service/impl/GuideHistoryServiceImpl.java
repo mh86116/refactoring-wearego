@@ -21,17 +21,4 @@ import java.util.List;
 public class GuideHistoryServiceImpl implements GuideHistoryService {
     private final GuideHistoryRepository historyRepository;
 
-    @Override
-    public void getGuideSignUpHistory(String email, String bank, String account, Long id) {
-        try {
-            List<String> list = List.of(email, bank, account);
-            List<GuideCategory> categories = new ArrayList<>(Arrays.asList(GuideCategory.values()));
-            for (int i = 0; i < list.size(); i++) {
-                GuideHistory history = GuideHistory.createHistory(list.get(i), categories.get(i), id);
-                historyRepository.save(history);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            log.error("history save error!! " + e);
-        }
-    }
 }

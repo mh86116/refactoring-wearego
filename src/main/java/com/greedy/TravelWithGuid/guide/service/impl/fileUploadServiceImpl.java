@@ -27,7 +27,7 @@ public class fileUploadServiceImpl implements fileUploadService {
             File filePath1 = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload");
             File filePath2 = null;
             File filePath3 = null;
-            if (name.equals("guide")) {
+            if (name.equals("GUIDE")) {
                 filePath2 = new File(filePath1 + "/guide" + "/" + savedName);
                 filePath3 = new File("/img/upload/guide" + "/" + savedName);
             } else {

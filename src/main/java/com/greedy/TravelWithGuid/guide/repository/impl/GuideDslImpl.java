@@ -1,8 +1,11 @@
 package com.greedy.TravelWithGuid.guide.repository.impl;
 
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
-import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.repository.GuideDsl;
+import com.greedy.TravelWithGuid.member.model.dto.SubmitGuideDTO;
+import com.greedy.TravelWithGuid.member.model.dto.RejectGuideDTO;
+import com.greedy.TravelWithGuid.member.model.entity.GuideApproval;
+import com.greedy.TravelWithGuid.member.model.enums.Approval;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.greedy.TravelWithGuid.guide.model.entity.QGuide.guide;
+import static com.greedy.TravelWithGuid.member.model.entity.QGuideApproval.guideApproval;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,35 +29,80 @@ public class GuideDslImpl implements GuideDsl {
 
     @Override
     public Page<GuideDTO> getGuides(String word, Pageable pageable, boolean name) {
-        if (name) {
-            List<Guide> guides = selectApprovalGuide(word, pageable, true);
-            List<GuideDTO> content = toGuideListDTOS(guides);
-            JPAQuery<Guide> countQuery = queryFactory.selectFrom(guide);
-            return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
-        } else {
-            List<Guide> guides = selectApprovalGuide(word, pageable, false);
-            List<GuideDTO> content = toGuideListDTOS(guides);
-            JPAQuery<Guide> countQuery = queryFactory.selectFrom(guide);
-            return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+//        if (name) {
+//            List<Guide> guides = selectApprovalGuide(word, pageable, true);
+//            List<GuideDTO> content = toGuideListDTOS(guides);
+//            JPAQuery<Guide> countQuery = queryFactory.selectFrom(guide);
+//            return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+//        } else {
+//            List<Guide> guides = selectApprovalGuide(word, pageable, false);
+//            List<GuideDTO> content = toGuideListDTOS(guides);
+//            JPAQuery<Guide> countQuery = queryFactory.selectFrom(guide);
+//            return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+//        }
+        return null;
+    }
+
+    @Override
+    public Page<RejectGuideDTO> getApproval(String word, Pageable pageable, String type) {
+        switch (type) {
+            case "SUBMIT": {
+                List<GuideApproval> approvals = selectApproval(word, pageable, type);
+                List<RejectGuideDTO> content = toApproval(approvals);
+                JPAQuery<GuideApproval> countQuery = queryFactory.selectFrom(guideApproval);
+                return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+            }
+            case "APPROVE": {
+//                List<GuideApproval> approvals = selectApproval(word, pageable, type);
+//                List<RejectGuideDTO> content = toApproval(approvals);
+//                JPAQuery<GuideApproval> countQuery = queryFactory.selectFrom(guideApproval);
+//                return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+            }
+            case "REJECT": {
+                List<GuideApproval> approvals = selectApproval(word, pageable, type);
+                List<RejectGuideDTO> content = toApproval(approvals);
+                JPAQuery<GuideApproval> countQuery = queryFactory.selectFrom(guideApproval);
+                return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+            }
+            default:
+                return null;
         }
     }
 
-    private List<Guide> selectApprovalGuide(String word, Pageable pageable, boolean name) {
+
+    private List<GuideApproval> selectApproval(String word, Pageable pageable, String type) {
         return queryFactory
-                .selectFrom(guide)
+                .selectFrom(guideApproval)
                 .where(getGuidePredicate(word)
-                        .and(guide.approvalYn.eq(name)))
-                .orderBy(guide.createdDt.desc())
+                        .and(guideApproval.approval.eq(Approval.valueOf(type))))
+                .orderBy(guideApproval.createdDt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
     }
 
-    private List<GuideDTO> toGuideListDTOS(List<Guide> guides) {
-        return guides.stream()
-                .map(GuideDTO::new)
+    private List<RejectGuideDTO> toApproval(List<GuideApproval> approvals) {
+        return approvals.stream()
+                .map(RejectGuideDTO:: new)
                 .collect(Collectors.toList());
     }
+
+//    private List<Guide> selectApprovalGuide(String word, Pageable pageable, boolean name) {
+//        return queryFactory
+//                .selectFrom(guide)
+//                .where(getGuidePredicate(word)
+//                        .and(guide.isEnable.eq(name)))
+//                .orderBy(guide.createdDt.desc())
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+//                .fetch();
+//    }
+//
+//    private List<GuideDTO> toGuideListDTOS(List<Guide> guides) {
+//        return guides.stream()
+//                .map(GuideDTO::new)
+//                .collect(Collectors.toList());
+//    }
 
     private BooleanBuilder getGuidePredicate(String word) {
         BooleanBuilder builder = new BooleanBuilder();
