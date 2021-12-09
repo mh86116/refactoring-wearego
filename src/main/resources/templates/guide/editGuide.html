@@ -31,49 +31,43 @@
                                 <h4>가이드 신청</h4>
                                 <div class="aa-center">
                                     <form th:action="@{/guide/editGuide}" method="post" encType="multipart/form-data">
-                                        <table class="aa-login-form">
+                                        <table style="text-align: center;" border="1">
                                             <tr>
+                                                <td rowspan="2">이미지</td>
                                                 <td rowspan="2" id="titleImgArea">
-                                                    <img id="titleImg" width="200" height="200"
+                                                    <img id="titleImg" width="150" height="150"
                                                          onclick="document.getElementById('thumbnailImg1').click();">
                                                 </td>
-                                                <td height="50"><label><strong>이름</strong>
-                                                    <input type="text" name="name">
-                                                </label></td>
+                                                <td>이름</td>
+                                                <td><label><input type="text" size="15" name="name"></label></td>
                                             </tr>
                                             <tr>
-                                                <td height="50"><label><strong>이메일</strong>
-                                                    <input type="text" name="email">
-                                                </label></td>
+                                                <td>Email</td>
+                                                <td><label><input type="text" size="15" name="email"></label></td>
                                             </tr>
                                             <tr>
-                                                <td height="50"><label style="padding-right: 25px;"><strong>은행명</strong>
-                                                    <input type="text" name="bank">
-                                                </label></td>
-                                                <td height="50"><label><strong>계좌번호</strong>
-                                                    <input type="text" name="account">
-                                                </label></td>
+                                                <td height="75">은행</td>
+                                                <td><label><input type="text" size="15" name="bank"></label></td>
+                                                <td>계좌번호</td>
+                                                <td><label><input type="text" size="15" name="account"></label></td>
                                             </tr>
                                             <tr>
-                                                <td height="50"><strong>공인언어자격증</strong></td>
-                                                <td height="50"><strong>주민등록사본</strong></td>
-                                            </tr>
-                                            <tr>
+                                                <td><strong>언어자격증</strong></td>
                                                 <td id="contentImgArea1" style="width: 150px;">
                                                     <img id="contentImg1" width="150" height="150"
                                                          onclick="document.getElementById('thumbnailImg2').click();">
                                                 </td>
+                                                <td height="50"><strong>주민등록사본</strong></td>
                                                 <td id="contentImgArea2" style="width: 150px;">
                                                     <img id="contentImg2" width="150" height="150"
                                                          onclick="document.getElementById('thumbnailImg3').click();">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" height="50"><strong>경력 및 자기소개</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="3"><pre style="background-color: transparent; border: none;">
-                                                    <textarea name="intro" rows="10" cols="65" style="resize: none;"></textarea></pre>
+                                                <td><strong>경력 및 자기소개</strong></td>
+                                                <td colspan="3">
+                                                    <pre style="background-color: transparent; border: none;"><label><textarea
+                                                            name="intro" rows="10" cols="65" style="resize: none;"></textarea></label></pre>
                                                 </td>
                                             </tr>
                                         </table>
