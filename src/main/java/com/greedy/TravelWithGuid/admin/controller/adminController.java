@@ -54,17 +54,17 @@ public class adminController {
         }
     }
 
-//    @GetMapping("/waitingGuides")
-//    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
-//                         @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
-//        model.addAttribute("word", word);
-//        model.addAttribute("guides", guideService.getGuides(word, pageable, false));
-//        if (StringUtils.hasText(word) && !paging) {
-//            return "admin/guide/waitingGuides :: #guideTable";
-//        } else {
-//            return "admin/guide/waitingGuides";
-//        }
-//    }
+    @GetMapping("/waitingGuides")
+    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
+                         @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        model.addAttribute("word", word);
+        model.addAttribute("guides", guideService.getGuides(word, pageable, false));
+        if (StringUtils.hasText(word) && !paging) {
+            return "admin/guide/waitingGuides :: #guideTable";
+        } else {
+            return "admin/guide/waitingGuides";
+        }
+    }
 
     @ResponseBody
     @PatchMapping("/guide/{id}")
@@ -78,7 +78,7 @@ public class adminController {
     }
 
     @GetMapping("/waiteGuide")
-    public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
+    public String waiteGuides(Model model, @RequestParam(value = "word", required = false) String word,
                               @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
         model.addAttribute("word", word);
         model.addAttribute("approval", guideService.getApproval(word, pageable, "SUBMIT"));

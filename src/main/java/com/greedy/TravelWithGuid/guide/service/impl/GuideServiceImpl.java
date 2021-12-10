@@ -71,6 +71,18 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
+    public Guide getUpdateGuide(String name) {
+        return null;
+    }
+
+//    @Override
+//    public boolean getUpdateGuide(String name) {
+//        Guide guide = guideRepository.findRefNo(name);
+//        System.out.println("guide = " + guide.getId());
+//        System.out.println("guide.getName() = " + guide.getName());
+//    }
+
+    @Override
     public void patchGuide(Long id) {
         //Approval
         GuideApproval entity = findApprovalById(id);
@@ -108,6 +120,10 @@ public class GuideServiceImpl implements GuideService {
     public Member memberId(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다. guideId = " + id));
+    }
+
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 
     public Guide guideId(Long id) {

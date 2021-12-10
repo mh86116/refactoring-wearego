@@ -4,6 +4,7 @@ import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberCheckDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDeleteDTO;
+import com.greedy.TravelWithGuid.member.model.dto.UpdateMemberDTO;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public interface MemberService {
 
     Member updateMember(String name);
 
-    void patchUpdate(Long id, UpdateGuideDTO dto);
+    void patchUpdate(Long id, UpdateMemberDTO dto);
 
     void patchPwdUpdate(Long id, String pwd);
 

@@ -35,13 +35,19 @@ public class GuideController {
         boolean result = guideService.getGuideSignUp(multipartFileList, dto, member);
         if (result) {
             model.addAttribute("msg", "신청 승인 대기중입니다. 승인이 완료될 때까지 기다려 주세요.");
-            model.addAttribute("movePath", "/goods/editGoods");
+            model.addAttribute("movePath", "/myPage");
             return "cmmn/success";
         } else {
             model.addAttribute("msg", "신청이 실패 되었습니다. 다시 확인해주세요.");
-            model.addAttribute("movePath", "/");
+            model.addAttribute("movePath", "/guide/editGuide");
             return "cmmn/fail";
         }
+    }
+
+    @GetMapping("/updateGuide")
+    public String updateGuide(Model model, Principal principal) {
+       model.addAttribute("guide", guideService.getUpdateGuide(principal.getName()));
+        return "guide/updateGuide";
     }
 
     /************

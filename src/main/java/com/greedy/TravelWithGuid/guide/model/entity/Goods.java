@@ -6,6 +6,7 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Builder
@@ -47,6 +48,9 @@ public class Goods extends BaseTimeEntity implements Persistable<Long> {
 
     @Column(name = "IS_ENABLE")         //활성화
     private boolean isEnable;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
+    private List<Attachment> attachments;
 
     public static Goods createGoods(Guide guide, String title, String price, String place, String startDt, String endDt, String person, String body, boolean b) {
         return Goods.builder()

@@ -23,6 +23,7 @@ public class Attachment extends BaseTimeEntity implements Persistable<Long> {
     @Column(name = "CATEGORY_")
     private PhotoCategory category;
 
+    @JoinColumns({@JoinColumn(name = "GUIDE_NO", referencedColumnName = "GUIDE_NO"), @JoinColumn(name = "GOODS_NO", referencedColumnName = "GOODS_NO")})
     @Column(name = "REF_NO")
     private Long refNo;
 

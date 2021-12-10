@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/layout}" lang="ko">
+<body layout:fragment="content">
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="/main/img/sr/elephant.jpg" width="1900" height="300" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>MY PAGE</h2>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">UPDATE GUIDE</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section><!-- / catg header banner section -->
+
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">
+                    <div class="row-middle">
+                        <div class="col-md-6">
+                            <h4>가이드 신청</h4>
+                            <!-- TAB -->
+                            <ul class="nav nav-tabs aa-products-tab">
+                                <li><a href="/guide/updateGuide">가이드정보수정</a></li>
+                                <li><a href="/guide/delete">가이드취소</a></li>
+                            </ul><!-- TAB 영역 끝 -->
+                            <div class="aa-center">
+                                <form th:action="@{/guide/updateGuide}" method="post" encType="multipart/form-data"
+                                      style="margin-left: 30px;">
+                                <table>
+                                    <tr>
+                                        <td>이름</td>
+                                        <td><label><input type="text" name="name"></label></td>
+                                        <td>이메일</td>
+                                        <td><label><input type="email" name="email"></label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>은행</td>
+                                        <td><label><input type="text" name="bank"></label></td>
+                                        <td>계좌번호</td>
+                                        <td><label><input type="text" name="account"></label></td>
+                                    </tr>
+                                </table>
+                                    <div style="text-align: center;">
+                                        <button type="submit" class="aa-browse-btn">신청하기</button>
+                                        <button type="reset" class="aa-browse-btn"
+                                                style="background-color: #ffffff; color:#ff6666">취소하기
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

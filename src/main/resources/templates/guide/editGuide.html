@@ -17,8 +17,7 @@
             </div>
         </div>
     </div>
-</section>
-<!-- / catg header banner section -->
+</section><!-- / catg header banner section -->
 
 <section id="aa-myaccount">
     <div class="container">
@@ -27,74 +26,69 @@
                 <div class="aa-myaccount-area">
                     <div class="row-middle">
                         <div class="col-md-6">
-<!--                            <div class="aa-myaccount-register">-->
-                                <h4>가이드 신청</h4>
-                                <div class="aa-center">
-                                    <form th:action="@{/guide/editGuide}" method="post" encType="multipart/form-data">
-                                        <table style="text-align: center;" border="1">
-                                            <tr>
-                                                <td rowspan="2">이미지</td>
-                                                <td rowspan="2" id="titleImgArea">
-                                                    <img id="titleImg" width="150" height="150"
-                                                         onclick="document.getElementById('thumbnailImg1').click();">
-                                                </td>
-                                                <td>이름</td>
-                                                <td><label><input type="text" size="15" name="name"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email</td>
-                                                <td><label><input type="text" size="15" name="email"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td height="75">은행</td>
-                                                <td><label><input type="text" size="15" name="bank"></label></td>
-                                                <td>계좌번호</td>
-                                                <td><label><input type="text" size="15" name="account"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>언어자격증</strong></td>
-                                                <td id="contentImgArea1" style="width: 150px;">
-                                                    <img id="contentImg1" width="150" height="150"
-                                                         onclick="document.getElementById('thumbnailImg2').click();">
-                                                </td>
-                                                <td height="50"><strong>주민등록사본</strong></td>
-                                                <td id="contentImgArea2" style="width: 150px;">
-                                                    <img id="contentImg2" width="150" height="150"
-                                                         onclick="document.getElementById('thumbnailImg3').click();">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>경력 및 자기소개</strong></td>
-                                                <td colspan="3">
-                                                    <pre style="background-color: transparent; border: none;"><label><textarea
-                                                            name="intro" rows="10" cols="65" style="resize: none;"></textarea></label></pre>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <div style="text-align: center;">
-                                            <button type="submit" class="aa-browse-btn" id="guideSignup">신청하기</button>
-                                            <button type="reset" class="aa-browse-btn"
-                                                    style="background-color: #ffffff; color:#ff6666">취소하기
-                                            </button>
-                                        </div>
-                                        <div class="thumbnail-file-area">
-                                            <input type="file" id="thumbnailImg1" name="file"
-                                                   onchange="loadImg(this, 1)">
-                                            <input type="file" id="thumbnailImg2" name="file"
-                                                   onchange="loadImg(this, 2)">
-                                            <input type="file" id="thumbnailImg3" name="file"
-                                                   onchange="loadImg(this, 3)">
-                                        </div>
-                                        <br>
-                                    </form>
-                                </div>
+                            <h4>가이드 신청</h4>
+                            <div class="aa-center">
+                                <form th:action="@{/guide/editGuide}" method="post" encType="multipart/form-data"
+                                      style="margin-left: 30px;">
+                                    <table style="text-align: center;">
+                                        <tr>
+                                            <td rowspan="2"><b>이미지</b></td>
+                                            <td rowspan="2"><img id="titleImg" width="150" height="150"
+                                                                 onclick="document.getElementById('thumbnailImg1').click();">
+                                            </td>
+                                            <td><b>이름</b></td>
+                                            <td><label><input type="text" size="16" name="name"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>이메일</b></td>
+                                            <td><label><input type="text" size="16" name="email"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td height="75"><b>은행</b></td>
+                                            <td><label><input type="text" size="16" name="bank"></label></td>
+                                            <td><b>계좌번호</b></td>
+                                            <td><label><input type="text" size="16" name="account"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>언어인증</b></td>
+                                            <td><img id="contentImg1" width="100" height="100"
+                                                     onclick="document.getElementById('thumbnailImg2').click();"></td>
+                                            <td><b>등록사본</b></td>
+                                            <td><img id="contentImg2" width="100" height="100"
+                                                     onclick="document.getElementById('thumbnailImg3').click();"></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"><b>경력 및<br> 자기 소개</b></td>
+                                            <td colspan="3"><pre
+                                                    style="border: none; background-color: transparent;"><label><textarea
+                                                    name="intro" rows="10" cols="50"
+                                                    style="resize: none;"></textarea></label></pre>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div style="text-align: center;">
+                                        <button type="submit" class="aa-browse-btn" id="guideSignup">신청하기</button>
+                                        <button type="reset" class="aa-browse-btn"
+                                                style="background-color: #ffffff; color:#ff6666">취소하기
+                                        </button>
+                                    </div>
+                                    <div class="thumbnail-file-area">
+                                        <input type="file" id="thumbnailImg1" name="file"
+                                               onchange="loadImg(this, 1)">
+                                        <input type="file" id="thumbnailImg2" name="file"
+                                               onchange="loadImg(this, 2)">
+                                        <input type="file" id="thumbnailImg3" name="file"
+                                               onchange="loadImg(this, 3)">
+                                    </div>
+                                    <br>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--    </div>-->
+    </div>
 </section>
 
 <script>

@@ -52,7 +52,7 @@ public class Guide extends BaseTimeEntity implements Persistable<Long> {
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
     private List<Attachment> attachments;
 
     public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean isEnable) {

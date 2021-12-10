@@ -27,22 +27,30 @@ public class fileUploadServiceImpl implements fileUploadService {
             File filePath1 = new File(System.getProperty("user.dir") + "/src/main/resources/static/img/upload");
             File filePath2 = null;
             File filePath3 = null;
+            
+            if (!filePath1.exists()) {
+                System.out.println("폴더 생성 path1 = " + filePath1.mkdirs());
+            }
             if (name.equals("GUIDE")) {
-                filePath2 = new File(filePath1 + "/guide" + "/" + savedName);
+                filePath2 = new File(filePath1 + "/guide");
+                if (!filePath2.exists()) {
+                    System.out.println("폴더 생성 path2 = " + filePath2.mkdirs());
+                }
+                filePath2 = new File(filePath2 + "/" + savedName);
                 filePath3 = new File("/img/upload/guide" + "/" + savedName);
             } else {
-                filePath2 = new File(filePath1 + "/goods" + "/" + savedName);
+                filePath2 = new File(filePath1 + "/goods");
+                if (!filePath2.exists()) {
+                    System.out.println("폴더 생성 path2 = " + filePath2.mkdirs());
+                }
+                filePath2 = new File(filePath2 + "/" + savedName);
                 filePath3 = new File("/img/upload/goods" + "/" + savedName);
-            }
-            if (!filePath1.exists()) {
-                System.out.println("폴더 생성 = " + filePath1.mkdirs());
             }
             try {
                 FileOutputStream newFilePath = new FileOutputStream(filePath2, true);
                 newFilePath.write(file.getBytes());
                 Attachment attachment = Attachment.create(id, file.getOriginalFilename(), savedName, filePath3.getPath(), name);
                 attachmentRepository.save(attachment);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

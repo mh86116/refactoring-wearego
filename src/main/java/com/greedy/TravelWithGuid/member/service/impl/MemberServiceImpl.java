@@ -4,6 +4,7 @@ import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberCheckDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDeleteDTO;
+import com.greedy.TravelWithGuid.member.model.dto.UpdateMemberDTO;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.model.entity.MemberHistory;
 import com.greedy.TravelWithGuid.member.model.enums.MemberCategory;
@@ -49,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void patchUpdate(Long id, UpdateGuideDTO dto) {
+    public void patchUpdate(Long id, UpdateMemberDTO dto) {
         Member member = findMemberById(id);
         List<String> before = List.of(member.getNickname(), member.getPhone());
         member.patchUpdateMember(id, dto.getNickname(), dto.getPhone().replace("-" , ""));
