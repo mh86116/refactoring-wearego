@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean join(JoinDTO dto) {
+//        Member email = memberRepository.findByEmail(dto.getEmail());
+//        if (email != null) {
+//            System.out.println(" 값이 있습니다. ");
+//        } else {
+//            System.out.println(" 값이 없습니다. ");
+//        }
         try {
             Member member = Member.builder()
                     .email(dto.getEmail())
@@ -44,6 +49,12 @@ public class LoginServiceImpl implements LoginService {
         }
     }
 
+    @Override
+    public boolean checkEmail(String email) { return memberEmail(email) == null; }
+
+    @Override
+    public boolean checkNickname(String nickname) { return memberNickname(nickname) == null; }
+
     /******************************************************
      * 공통 로직
      ******************************************************/
@@ -54,6 +65,9 @@ public class LoginServiceImpl implements LoginService {
 
     private Member memberEmail(String email) {
         return memberRepository.findByEmail(email);
+    }
+    private Member memberNickname(String nickname) {
+        return memberRepository.findByNickname(nickname);
     }
 
     @Override

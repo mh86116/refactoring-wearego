@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -23,7 +24,19 @@ public class LoginController {
     }
 
     @GetMapping("/join")
-    public String join() {
+    public String join(Model model, @RequestParam(value = "email", required = false) String email,
+                       @RequestParam(value = "nickname", required = false) String nickname) {
+        if (email != null) {
+        boolean result = loginService.checkEmail(email);
+            model.addAttribute("email", result);
+            System.out.println("model = " + model);
+            return "/login/join";
+        } else if (nickname != null) {
+        boolean result = loginService.checkNickname(nickname);
+            model.addAttribute("nickname", result);
+            System.out.println("model = " + model);
+            return "/login/join";
+        }
         return "login/join";
     }
 
@@ -37,9 +50,11 @@ public class LoginController {
         if (loginService.join(dto)) {
             return "redirect:/";
         }
-        return "cmmn/error";
+        return "login/join";
     }
 
     @GetMapping("/error")
-    public String error() { return "cmmn/error"; }
+    public String error() {
+        return "cmmn/error";
+    }
 }

@@ -1,4 +1,4 @@
-/*
+  /*
   Template Name: Daily Shop
   Author : MarkUps
   Author URI: http://www.markups.io/
@@ -2671,6 +2671,7 @@ img {
 .aa-login-form label {
   font-weight: normal;
   margin-top: 8px;
+  width: 100%;
 }
 
 .aa-login-form label span {

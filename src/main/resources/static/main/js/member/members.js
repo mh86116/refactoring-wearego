@@ -16,10 +16,16 @@ $(function() {
             if (pwd1 === pwd2) {
                 $('#alert-success').show();
                 $('#alert-danger').hide();
+                $('#nickname').keyup(function () {
+                    $('#alert-success').remove();
+                });
                 $('#submit').removeAttr('disabled');
             } else {
                 $('#alert-danger').show();
                 $('#alert-success').hide();
+                $('#nickname').keyup(function () {
+                    $('#alert-danger').remove();
+                });
                 $('#submit').attr('disabled', 'disabled');
             }
         }

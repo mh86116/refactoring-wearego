@@ -14,23 +14,35 @@
                                 <h4>회원가입</h4>
                                 <div class="aa-center">
                                     <form id="joinForm" th:action="@{/join}" class="aa-login-form" method="post">
-                                        <label for="email">E-mail<span>*</span></label>
-                                        <input type="email" placeholder="이메일을 입력해주세요." id="email" name="email">
-<!--&lt;!&ndash;                                        <form th:action="@{/mail}" method="post">&ndash;&gt;-->
-<!--                                            <button onclick="emailSend()">인증받기</button>-->
-<!--&lt;!&ndash;                                        </form>&ndash;&gt;-->
-<!--                                        <label for="certificationNumber">인증번호<span>*</span></label>-->
-<!--                                        <input type="text" placeholder="인증번호를 입력해주세요." id="certificationNumber" >-->
-<!--                                            <button id="certification" onclick="emailCertification()">인증받기</button>-->
-                                        <label for="pwd">비밀번호<span>*</span></label>
-                                        <input type="password" placeholder="Password" id="pwd" name="pwd" >
+                                        <div>
+                                            <label>E-mail<span>*</span>
+                                                <input type="button" onclick="approval(1)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
+                                            </label>
+                                            <label for="email1"><input type="email" placeholder="이메일을 입력해주세요" id="email1" name="email" required></label>
+                                            <div class="alert alert-danger" id="checkEmailOk">이미 사용하고 있는 email 입니다. 확인해주세요.</div>
+                                            <div class="alert alert-success" id="checkEmailNull">사용 가능한 email 입니다.</div>
+                                        </div>
+                                        <!--&lt;!&ndash;                                        <form th:action="@{/mail}" method="post">&ndash;&gt;-->
+                                        <!--                                            <button onclick="emailSend()">인증받기</button>-->
+                                        <!--&lt;!&ndash;                                        </form>&ndash;&gt;-->
+                                        <!--                                        <label for="certificationNumber">인증번호<span>*</span></label>-->
+                                        <!--                                        <input type="text" placeholder="인증번호를 입력해주세요." id="certificationNumber" >-->
+                                        <!--                                            <button id="certification" onclick="emailCertification()">인증받기</button>-->
+                                        <label for="pwd1">비밀번호<span>*</span></label>
+                                        <input type="password" placeholder="Password" id="pwd1" name="pwd">
                                         <label for="pwd2">비밀번호확인<span>*</span></label>
-                                        <input type="password" placeholder="Password" id="pwd2" name="pwd2" >
-                                        <label for="nickname">닉네임<span>*</span></label>
-                                        <input type="text" placeholder="닉네임을 입력해주세요." id="nickname" name="nickname"
-                                               >
+                                        <input type="password" placeholder="Password" id="pwd2" name="pwd2">
+                                        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+                                        <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+                                        <label for="nickname">닉네임<span>*</span>
+                                            <input type="button" onclick="approval(2)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
+                                        </label>
+                                            <label><input type="text" id="nickname" placeholder="닉네임을 입력해주세요" name="nickname"></label>
+                                        <div class="alert alert-danger" id="checkNicknameOk">중복된 닉네임입니다. 다시 입력해주세요</div>
+                                        <div class="alert alert-success" id="checkNicknameNull">사용 가능한 닉네임입니다.</div>
+                                        <!--                                        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>-->
                                         <label for="phone">핸드폰<span>*</span></label>
-                                        <input type="tel" placeholder="휴대폰번호를 입력해주세요" id="phone" name="phone" >
+                                        <input type="tel" placeholder="휴대폰번호를 입력해주세요" id="phone" name="phone">
                                         <button type="submit" class="aa-browse-btn">회원가입</button>
                                     </form>
                                 </div>
