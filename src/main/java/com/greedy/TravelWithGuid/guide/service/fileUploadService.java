@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface fileUploadService {
 
-
     void fileUpload(List<MultipartFile> multipartFileList, Long id, String name);
 }
