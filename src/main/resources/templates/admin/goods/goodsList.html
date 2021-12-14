@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cmmn/layout/adminLayout}" lang="ko">
+
+<body layout:fragment="content">
+<section id="container">
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> 가입 회원 관리</h3>
+            <div class="row mb">
+                <!-- page start-->
+                <div class="content-panel">
+                    <div class="adv-table" style="margin: 10px;" id="guideTable">
+                        <table class="display table table-bordered" id="hidden-table-info" style="text-align: center; vertical-align: middle;">
+                            <thead>
+                            <tr>
+                                <th class="table-th"><i class="fa fa-bullhorn"></i>상품번호</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i></th>
+                                <th class="table-th"><i class="fa fa-bookmark"></i>이름</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>은행</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>계좌번호</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>소개/경력기술</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>등급</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>경고횟수</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>가입날짜</th>
+                                <th class="table-th"><i class=" fa fa-edit"></i>수정</th>
+                            </tr>
+                            </thead>
+<!--                            <tbody>-->
+<!--                            <tr th:each="list : ${guides}">-->
+<!--                                <td th:text="${list.id}" style="vertical-align: middle;" id="no"></td>-->
+<!--                                <td th:text="${list.name}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.email}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.bank}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.account}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.intro}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.rank}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.warning}" style="vertical-align: middle;"></td>-->
+<!--                                <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>-->
+<!--                                <td style="vertical-align: middle;" >-->
+<!--                                    <button class="btn" onclick="processMember(this)">등업</button>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+                        </table>
+
+                        <form id="members" onsubmit="return false;" method="get" style="display: inline-block;">
+                            <!-- Nm 검색 폼-->
+                            <div class="form-group">
+                                <label for="searchKeyword" class="search-label">
+                                    <input class="input-txt" th:value="${word}" id="searchKeyword" name="word" placeholder="번호, 이름으로 조회" ></label>
+                                <button class="btn btn-send" onclick="searchGuide()">검색</button>
+                            </div>
+                        </form>
+
+                        <!-- 페이징 처리 -->
+<!--                        <ul class="dataTables_paginate paging_bootstrap pagination"-->
+<!--                            th:with="start=${T(Math).floor(guides.number/10)*10 + 1},-->
+<!--                    last=(${start + 9 < guides.totalPages ? start + 9 : guides.totalPages})">-->
+<!--                            <th:block th:with="-->
+<!--                firstAddr=@{/admin/guides(page=1,word=${word},paging=true)},-->
+<!--                prevAddr=@{/admin/guides(page=${guides.number},word=${word},paging=true)},-->
+<!--                nextAddr=@{/admin/guides(page=${guides.number + 2},word=${word},paging=true)},-->
+<!--                lastAddr=@{/admin/guides(page=${guides.totalPages},word=${word},paging=true)}">-->
+<!--                                &lt;!&ndash; ** 첫번째 페이지 &ndash;&gt;-->
+<!--                                <li>-->
+<!--                                    <a th:href="${firstAddr}" aria-label="First">-->
+<!--                                        <span aria-hidden="true">First</span>-->
+<!--                                    </a>-->
+<!--                                </li>&lt;!&ndash; /첫번째 페이지 &ndash;&gt;-->
+<!--                                &lt;!&ndash; ** 이전 페이지 &ndash;&gt;-->
+<!--                                <li th:class="${guides.first} ? 'disabled'">-->
+<!--                                    <a th:href="${guides.first} ? '#' :${prevAddr}"-->
+<!--                                       aria-label="Previous">-->
+<!--                                        <span aria-hidden="true">&lt;</span>-->
+<!--                                    </a>-->
+<!--                                </li>&lt;!&ndash; /이전 페이지 &ndash;&gt;-->
+<!--                                &lt;!&ndash; ** 1,2,3,4,... 페이지 &ndash;&gt;-->
+<!--                                <li th:each="page: ${#numbers.sequence(start, last)}"-->
+<!--                                    th:class="${page == guides.number + 1} ? 'active'">-->
+<!--                                    <a th:text="${page}"-->
+<!--                                       th:href="@{/admin/guides(page=${page},word=${word},paging=true)}"></a>-->
+<!--                                </li>&lt;!&ndash; /1,2,3,4,.. 페이지&ndash;&gt;-->
+<!--                                &lt;!&ndash; ** 다음 페이지 &ndash;&gt;-->
+<!--                                <li th:class="${guides.last} ? 'disabled'">-->
+<!--                                    <a th:href="${guides.last} ? '#' : ${nextAddr}"-->
+<!--                                       aria-label="Next">-->
+<!--                                        <span aria-hidden="true">&gt;</span>-->
+<!--                                    </a>-->
+<!--                                </li>&lt;!&ndash;/다음 페이지 &ndash;&gt;-->
+<!--                                &lt;!&ndash; ** 마지막 페이지 &ndash;&gt;-->
+<!--                                <li>-->
+<!--                                    <a th:href="${lastAddr}" aria-label="Last">-->
+<!--                                        <span aria-hidden="true">Last</span>-->
+<!--                                    </a>-->
+<!--                                </li>&lt;!&ndash; /마지막 페이지 &ndash;&gt;-->
+<!--                            </th:block>-->
+<!--                        </ul>-->
+                    </div>
+                </div><!-- page end-->
+            </div><!-- /row -->
+        </section><!-- /wrapper -->
+    </section>
+</section><!--main content end-->
+</body>
+</html>

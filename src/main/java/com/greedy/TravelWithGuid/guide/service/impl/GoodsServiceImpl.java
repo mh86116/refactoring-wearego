@@ -10,6 +10,7 @@ import com.greedy.TravelWithGuid.guide.service.GoodsService;
 import com.greedy.TravelWithGuid.guide.service.fileUploadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,5 +45,10 @@ public class GoodsServiceImpl implements GoodsService {
             uploadService.fileUpload(multipartFile, guide.getId(), "GUIDE");
         }
         return true;
+    }
+
+    @Override
+    public Object getGoodsList(String word, Pageable pageable) {
+        return null;
     }
 }

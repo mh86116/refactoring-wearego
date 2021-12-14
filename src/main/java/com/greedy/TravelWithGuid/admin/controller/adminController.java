@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.admin.controller;
 
-import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
+import com.greedy.TravelWithGuid.guide.service.GoodsService;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class adminController {
     private final MemberService memberService;
     private final GuideService guideService;
-    private final AttachmentRepository attachmentRepository;
+    private final GoodsService goodsService;
 
     @GetMapping("/")
     public String adminMain() {
@@ -98,6 +98,21 @@ public class adminController {
             return "admin/member/rejectGuide :: #memberTable";
         } else {
             return "admin/member/rejectGuide";
+        }
+    }
+
+    /******************************************************
+     * GOODS
+     *****************************************************/
+    @GetMapping("/goodsList")
+    public String goodsList(Model model, @RequestParam(value = "word", required = false) String word,
+                            @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
+        model.addAttribute("word", word);
+        model.addAttribute("goodsList", goodsService.getGoodsList(word, pageable));
+        if (StringUtils.hasText(word) && !paging) {
+            return "admin/goods/goodsList :: #goodsTable";
+        } else {
+            return "admin/goods/goodsList";
         }
     }
 
