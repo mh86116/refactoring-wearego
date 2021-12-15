@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{cmmn/layout/layout}" lang="ko">
 <body layout:fragment="content">
@@ -13,7 +13,7 @@
                             <div class="aa-myaccount-register">
                                 <h4>회원가입</h4>
                                 <div class="aa-center">
-                                    <form id="joinForm" th:action="@{/join}" class="aa-login-form" method="post">
+                                    <form id="joinForm" th:action="@{/join}" onsubmit="return checkForm();" class="aa-login-form" method="post">
                                         <div>
                                             <label>E-mail<span>*</span>
                                                 <input type="button" onclick="approval(1)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
@@ -43,7 +43,26 @@
                                         <!--                                        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>-->
                                         <label for="phone">핸드폰<span>*</span></label>
                                         <input type="tel" placeholder="휴대폰번호를 입력해주세요" id="phone" name="phone">
-                                        <button type="submit" class="aa-browse-btn">회원가입</button>
+                                        <button type="submit" class="aa-browse-btn">회원가입<a data-toggle="modal" id="joinOk"
+                                                                                       data-target="#join-modal">회원가입</a></button>
+
+                                        <!-- Login Modal -->
+                                        <div class="modal fade" id="join-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <!--                <form class="aa-login-form" th:action="@{/}" onsubmit="return joinOk();" method="get">-->
+                                                        <div style="height: 200px;">
+                                                            <h2>회원가입을 축하합니다.</h2>
+                                                            <p>행복하세요</p>
+                                                            <button class="aa-browse-btn" type="submit">확인</button>
+                                                        </div>
+                                                        <!--                </form>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -54,6 +73,37 @@
         </div>
     </div>
 </section>
+
+
+<!--&lt;!&ndash; Login Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="join-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-body">-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--&lt;!&ndash;                <form class="aa-login-form" th:action="@{/}" onsubmit="return joinOk();" method="get">&ndash;&gt;-->
+<!--                    <div style="height: 200px;">-->
+<!--                <h2>회원가입을 축하합니다.</h2>-->
+<!--                    <p>행복하세요</p>-->
+<!--                    <button class="aa-browse-btn" type="submit">로그인</button>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                </form>&ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--                    <label for="email">아이디 <span>*</span></label>-->
+<!--                    <input type="email" placeholder="email 을 입력하세요." id="email" name="username">-->
+<!--                    <label for="pwd">비밀번호<span>*</span></label>-->
+<!--                    <input type="password" placeholder="비밀번호를 입력하세요." id="pwd" name="password">-->
+<!--                    &lt;!&ndash;                    <label for="rememberMe" class="all" aria-describedby="rememberMeHelp">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <input type="checkbox" id="rememberMe" name="remember-me" checked>자동 로그인</label>&ndash;&gt;-->
+<!--                    <div th:if="${param.error}" style="color: red;">아이디 또는 비밀번호를 확인하세요</div>-->
+<!--                    <br>-->
+<!--                    <p class="aa-lost-password"><a href="/login/findAccount">비밀번호를 잊었나요?</a></p>-->
+<!--                    <div class="aa-register-now">-->
+<!--                        아직도 계정이 없으신가요??<a href="/join">지금 가입하세요!</a>-->
+<!--                    </div>-->
 
 </body>
 </html>

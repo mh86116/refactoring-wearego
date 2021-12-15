@@ -3,13 +3,17 @@ $(function () {
     $('#checkEmailNull').hide();
     $('#checkNicknameOk').hide();
     $('#checkNicknameNull').hide();
+    $('#joinOk').show();
 });
 
+let count1 = 0;
+let count2 = 0;
 function approval(num) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     let email;
     let nickname;
+    let value = $('#checkEmail').val();
     if (num === 1) {
         email = $('#email1').val();
         if (email !== '' && email !== null) {
@@ -17,22 +21,20 @@ function approval(num) {
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token)
                 },
-                url: "/join/",
-                data: email,
-                type: "GET",
+                url: "/joins",
+                data: {email: email},
+                type: "POST",
                 success: function (result) {
                     if (result === true) {
-                        $('#checkEmailOk').show();
-                        $('#checkEmailNull').hide();
-                        $('#pwd1').keyup(function () {
-                            $('#checkEmailOk').remove();
-                        });
-                    } else {
-                        $('#checkEmailOk').hide();
+                        count1++;
                         $('#checkEmailNull').show();
+                        $('#checkEmailOk').hide();
                         $('#pwd1').keyup(function () {
                             $('#checkEmailNull').remove();
                         });
+                    } else {
+                        $('#checkEmailOk').show();
+                        $('#checkEmailNull').hide();
                     }
                 }
             });
@@ -46,22 +48,20 @@ function approval(num) {
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token)
                 },
-                url: "/join/",
-                data: nickname,
-                type: "GET",
+                url: "/joins",
+                data: {nickname: nickname},
+                type: "POST",
                 success: function (result) {
                     if (result === true) {
-                        $('#checkNicknameOk').show();
-                        $('#checkNicknameNull').hide();
-                        $('#phone').keyup(function () {
-                            $('#checkNicknameOk').remove();
-                        });
-                    } else {
-                        $('#checkNicknameOk').hide();
+                        count2++;
                         $('#checkNicknameNull').show();
+                        $('#checkNicknameOk').hide();
                         $('#phone').keyup(function () {
                             $('#checkNicknameNull').remove();
                         });
+                    } else {
+                        $('#checkNicknameOk').show();
+                        $('#checkNicknameNull').hide();
                     }
                 }
             });
@@ -69,4 +69,21 @@ function approval(num) {
             alert("닉네임이 입력되지 않았습니다.");
         }
     }
+}
+
+
+
+function checkForm() {
+    if ((count1 !== 1 && count2 !== 1) || (count1 === 1 && count2 === 0) || (count1 === 0 && count2 === 1)) {
+        alert("중복확인 해주세요");
+        return false;
+    } else if (count1 === 1 && count2 === 1) {
+        joinOk();
+        // return true;
+    }
+}
+
+function joinOk() {
+    // $('#join-modal').show();
+        $('#joinOk').click();
 }

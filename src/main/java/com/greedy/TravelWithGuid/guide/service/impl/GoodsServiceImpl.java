@@ -1,6 +1,7 @@
 package com.greedy.TravelWithGuid.guide.service.impl;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGoodsDTO;
+import com.greedy.TravelWithGuid.guide.model.dto.GoodsDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Goods;
 import com.greedy.TravelWithGuid.guide.model.entity.GoodsOption;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
@@ -10,6 +11,8 @@ import com.greedy.TravelWithGuid.guide.service.GoodsService;
 import com.greedy.TravelWithGuid.guide.service.fileUploadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,7 +51,9 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Object getGoodsList(String word, Pageable pageable) {
-        return null;
+    public Page<GoodsDTO> getGoodsList(String word, Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, 20);
+        return goodsRepository.getGoodsList(word, pageable);
     }
 }

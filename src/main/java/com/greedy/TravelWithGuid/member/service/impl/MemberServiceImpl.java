@@ -42,8 +42,6 @@ public class MemberServiceImpl implements MemberService {
         return encoder.matches(dto.getPwd(), member.getPwd());
     }
 
-
-
     @Override
     public Member updateMember(String name) {
         return memberRepository.findByEmail(name);

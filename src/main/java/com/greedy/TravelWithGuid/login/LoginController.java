@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -23,22 +20,20 @@ public class LoginController {
         return "index";
     }
 
-    @GetMapping("/join")
-    public String join(Model model, @RequestParam(value = "email", required = false) String email,
+    @PostMapping("/joins")
+    @ResponseBody
+    public boolean join(@RequestParam(value = "email", required = false) String email,
                        @RequestParam(value = "nickname", required = false) String nickname) {
         if (email != null) {
-        boolean result = loginService.checkEmail(email);
-            model.addAttribute("email", result);
-            System.out.println("model = " + model);
-            return "/login/join";
+            return loginService.checkEmail(email);
         } else if (nickname != null) {
-        boolean result = loginService.checkNickname(nickname);
-            model.addAttribute("nickname", result);
-            System.out.println("model = " + model);
-            return "/login/join";
+            return loginService.checkNickname(nickname.replace(" ", ""));
         }
-        return "login/join";
+        return false;
     }
+
+    @GetMapping("/join")
+    public String joins() { return "login/join"; }
 
     @GetMapping("/login")
     public String login() {
