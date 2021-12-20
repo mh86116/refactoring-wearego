@@ -27,6 +27,11 @@ function processMember() {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
 
+    // let abc = [{}, {}];
+    //
+    // let no = $('#no').text();
+    // abc = [{no}, {no}];
+    // console.log(abc);
     let dto = {
         no: $('#no').text()
     };

@@ -17,5 +17,5 @@ public class EditGoodsDTO {
     private String person;
     private String body;
 
-    private List<OptionDTO> optionDTOList;
+//    private List<OptionDTO> optionDTOList;
 }

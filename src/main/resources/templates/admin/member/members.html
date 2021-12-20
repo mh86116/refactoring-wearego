@@ -22,7 +22,7 @@
                 <th class="table-th"><i class=" fa fa-edit"></i>회원권한</th>
                 <th class="table-th"><i class=" fa fa-edit"></i>가입상태</th>
                 <th class="table-th"><i class=" fa fa-edit"></i>가입일자</th>
-<!--                <th class="table-th"><i class=" fa fa-edit"></i>등업</th>-->
+                <th class="table-th"><i class=" fa fa-edit"></i>등업</th>
               </tr>
               </thead>
               <tbody>
@@ -34,9 +34,9 @@
                 <td th:text="${list.phone}" style="vertical-align: middle;"></td>
                 <td th:text="${list.isEnable()}" style="vertical-align: middle;"></td>
                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
-<!--                <td style="vertical-align: middle;" >-->
-<!--                  <button class="btn" onclick="processMember(this)">등업</button>-->
-<!--                </td>-->
+                <td style="vertical-align: middle;" >
+                  <button class="btn" onclick="processMember(this)">등업</button>
+                </td>
               </tr>
               </tbody>
             </table>

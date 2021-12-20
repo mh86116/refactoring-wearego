@@ -45,7 +45,7 @@ public class GoodsServiceImpl implements GoodsService {
                 optionRepository.save(option);
             }
             //image
-            uploadService.fileUpload(multipartFile, guide.getId(), "GUIDE");
+            uploadService.fileUpload(multipartFile, guide.getId(), "GOODS");
         }
         return true;
     }

@@ -4,6 +4,8 @@ import com.greedy.TravelWithGuid.guide.model.dto.EditGoodsDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
 import com.greedy.TravelWithGuid.guide.service.GoodsService;
+import com.greedy.TravelWithGuid.member.model.entity.Member;
+import com.greedy.TravelWithGuid.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import java.util.List;
 public class GoodsController {
     private final GoodsService goodsService;
     private final GuideRepository guideRepository;
+    private final MemberRepository memberRepository;
 
     /*******************************************
      * EDIT GOODS
@@ -33,9 +36,9 @@ public class GoodsController {
     @PostMapping("/editGoods")
     public String editFileUpload(@RequestParam("file") List<MultipartFile> multipartFile, @ModelAttribute EditGoodsDTO dto,
                                  @RequestParam(required = false) List<String> optionName, @RequestParam(required = false) List<String> optionPrice,
-                                 Principal principal, Model model) throws IOException {
-
-        Guide guide = guideId(principal.getName());
+                                 Principal principal, Model model) {
+        Member member = findByEmail(principal.getName());
+        Guide guide = findByMember(member.getId());
         boolean result = goodsService.goodsFileUpload(multipartFile, dto, optionName, optionPrice, guide);
         if (result) {
             model.addAttribute("msg", "등록 승인 대기중입니다. 승인이 완료될 때까지 기다려 주세요.");
@@ -53,7 +56,8 @@ public class GoodsController {
     /************
      * 공통 로직
      ***********/
-    public Guide guideId(String email) {
-        return guideRepository.findByEmail(email);
+    public Guide findByMember(Long id) {
+        return guideRepository.findByMember(id);
     }
+    private Member findByEmail(String email) { return memberRepository.findByEmail(email); }
 }
