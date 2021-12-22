@@ -52,7 +52,7 @@ public class Goods extends BaseTimeEntity implements Persistable<Long> {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
     private List<Attachment> attachments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "goods")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
     private List<GoodsOption> options;
 
     public static Goods createGoods(Guide guide, String title, String price, String place, String startDt, String endDt, String person, String body, boolean b) {

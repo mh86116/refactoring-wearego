@@ -105,11 +105,12 @@ public class adminController {
     /******************************************************
      * GOODS
      *****************************************************/
-    @GetMapping("/goodsList")
+    @GetMapping("/goods")
     public String goodsList(Model model, @RequestParam(value = "word", required = false) String word,
                             @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
         model.addAttribute("word", word);
-        model.addAttribute("goodsList", goodsService.getGoodsList(word, pageable));
+        model.addAttribute("goods", goodsService.getGoodsList(word, pageable));
+        System.out.println("model = " + model);
         if (StringUtils.hasText(word) && !paging) {
             return "admin/goods/goodsList :: #goodsTable";
         } else {

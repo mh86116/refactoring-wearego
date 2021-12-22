@@ -25,16 +25,16 @@ public class GoodsOption extends BaseTimeEntity implements Persistable<Long> {
     @Column(name = "OPTION_PRICE")
     private String optionPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "GOODS_NO")
-    private Goods goods;
+    @JoinColumn(name = "GOODS_NO", referencedColumnName = "GOODS_NO")
+    @Column(name = "REF_NO")
+    private Long refNo;
 
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
-    public static GoodsOption create(Goods goods, String name, String price) {
+    public static GoodsOption create(Long id, String name, String price) {
         return GoodsOption.builder()
-                .goods(goods)
+                .refNo(id)
                 .optionName(name)
                 .optionPrice(price)
                 .isEnable(false)

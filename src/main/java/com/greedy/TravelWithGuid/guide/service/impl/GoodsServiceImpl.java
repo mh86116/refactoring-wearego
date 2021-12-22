@@ -41,7 +41,7 @@ public class GoodsServiceImpl implements GoodsService {
                 for (int j = 0; j < optionPrice.size(); j++) {
                     price = optionPrice.get(i);
                 }
-                GoodsOption option = GoodsOption.create(goods, name, price);
+                GoodsOption option = GoodsOption.create(goods.getId(), name, price);
                 optionRepository.save(option);
             }
             //image

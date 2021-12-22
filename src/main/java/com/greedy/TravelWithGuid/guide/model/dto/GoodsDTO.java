@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class GoodsDTO {
     private String imgUrl;
     private String optionName;
     private String optionPrice;
+    private LocalDateTime createdDt;
 
     @QueryProjection
     public GoodsDTO(Goods goods) {
@@ -37,6 +40,7 @@ public class GoodsDTO {
         this.imgUrl = goods.getAttachments().get(0).getSavePath();
         this.optionName = goods.getOptions().get(0).getOptionName();
         this.optionPrice = goods.getOptions().get(0).getOptionPrice();
+        this.createdDt = goods.getCreatedDt();
     }
 
 }

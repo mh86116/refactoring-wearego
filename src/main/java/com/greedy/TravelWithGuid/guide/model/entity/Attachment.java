@@ -20,7 +20,7 @@ public class Attachment extends BaseTimeEntity implements Persistable<Long> {
     private Long id;
 
     @Enumerated(STRING)
-    @Column(name = "CATEGORY_")
+    @Column(name = "CATEGORY")
     private PhotoCategory category;
 
     @JoinColumns({@JoinColumn(name = "GUIDE_NO", referencedColumnName = "GUIDE_NO"), @JoinColumn(name = "GOODS_NO", referencedColumnName = "GOODS_NO")})
