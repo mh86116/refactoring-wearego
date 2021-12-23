@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PhotoCategory {
+public enum Category {
     GUIDE("GUIDE"),
     GOODS("GOODS");
 

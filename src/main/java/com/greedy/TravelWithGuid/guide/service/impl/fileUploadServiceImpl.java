@@ -1,7 +1,9 @@
 package com.greedy.TravelWithGuid.guide.service.impl;
 
-import com.greedy.TravelWithGuid.guide.model.entity.Attachment;
-import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
+import com.greedy.TravelWithGuid.goods.model.entity.GoodsAttachment;
+import com.greedy.TravelWithGuid.goods.repository.GoodsAttachmentRepository;
+import com.greedy.TravelWithGuid.guide.model.entity.GuideAttachment;
+import com.greedy.TravelWithGuid.guide.repository.GuideAttachmentRepository;
 import com.greedy.TravelWithGuid.guide.service.fileUploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,8 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class fileUploadServiceImpl implements fileUploadService {
-    private final AttachmentRepository attachmentRepository;
+    private final GoodsAttachmentRepository goodsAttachmentRepository;
+    private final GuideAttachmentRepository guideAttachmentRepository;
 
     public void fileUpload(List<MultipartFile> multipartFileList, Long id, String name) {
         for (MultipartFile file : multipartFileList) {
@@ -38,6 +41,15 @@ public class fileUploadServiceImpl implements fileUploadService {
                 }
                 filePath2 = new File(filePath2 + "/" + savedName);
                 filePath3 = new File("/img/upload/guide" + "/" + savedName);
+                try {
+                    FileOutputStream newFilePath = new FileOutputStream(filePath2, true);
+                    newFilePath.write(file.getBytes());
+                    GuideAttachment attachment = GuideAttachment.create(id, file.getOriginalFilename(), savedName, filePath3.getPath());
+                    guideAttachmentRepository.save(attachment);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             } else {
                 filePath2 = new File(filePath1 + "/goods");
                 if (!filePath2.exists()) {
@@ -45,14 +57,14 @@ public class fileUploadServiceImpl implements fileUploadService {
                 }
                 filePath2 = new File(filePath2 + "/" + savedName);
                 filePath3 = new File("/img/upload/goods" + "/" + savedName);
-            }
             try {
                 FileOutputStream newFilePath = new FileOutputStream(filePath2, true);
                 newFilePath.write(file.getBytes());
-                Attachment attachment = Attachment.create(id, file.getOriginalFilename(), savedName, filePath3.getPath(), name);
-                attachmentRepository.save(attachment);
+                GoodsAttachment attachment = GoodsAttachment.create(id, file.getOriginalFilename(), savedName, filePath3.getPath());
+                goodsAttachmentRepository.save(attachment);
             } catch (IOException e) {
                 e.printStackTrace();
+            }
             }
         }
     }

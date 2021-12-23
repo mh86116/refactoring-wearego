@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.member.model.dto;
 
-import com.greedy.TravelWithGuid.member.model.entity.GuideApproval;
+import com.greedy.TravelWithGuid.guide.model.entity.Examine;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class RejectGuideDTO {
     private LocalDateTime updateDt;
 
     @QueryProjection
-    public RejectGuideDTO(GuideApproval entity) {
+    public RejectGuideDTO(Examine entity) {
         this.id = entity.getId();
         this.nickname = entity.getMember().getNickname();
         this.name = entity.getGuide().getName();
@@ -34,7 +34,7 @@ public class RejectGuideDTO {
         this.intro = entity.getGuide().getIntro();
         this.createdDt = entity.getCreatedDt();
         this.approval = entity.getApproval().getValue();
-        this.imgUrl = entity.getGuide().getAttachments().get(0).getSavePath();
+        this.imgUrl = entity.getGuide().getGuideAttachments().get(0).getSavePath();
         this.reason = entity.getReject();
         this.updateDt = entity.getUpdateDate();
 

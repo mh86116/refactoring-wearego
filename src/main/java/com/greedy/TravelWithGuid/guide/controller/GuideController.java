@@ -1,7 +1,6 @@
 package com.greedy.TravelWithGuid.guide.controller;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
-import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.repository.MemberRepository;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -46,7 +44,7 @@ public class GuideController {
 
     @GetMapping("/updateGuide")
     public String updateGuide(Model model, Principal principal) {
-       model.addAttribute("guide", guideService.getUpdateGuide(principal.getName()));
+//       model.addAttribute("guide", guideService.getUpdateGuide(principal.getName()));
         return "guide/updateGuide";
     }
 

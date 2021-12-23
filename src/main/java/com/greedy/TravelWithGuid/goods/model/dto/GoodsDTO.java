@@ -1,13 +1,12 @@
-package com.greedy.TravelWithGuid.guide.model.dto;
+package com.greedy.TravelWithGuid.goods.model.dto;
 
-import com.greedy.TravelWithGuid.guide.model.entity.Goods;
+import com.greedy.TravelWithGuid.goods.model.entity.Goods;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -37,7 +36,7 @@ public class GoodsDTO {
         this.person = goods.getPerson();
         this.body = goods.getBody();
         this.isEnable = goods.isEnable();
-        this.imgUrl = goods.getAttachments().get(0).getSavePath();
+        this.imgUrl = goods.getGoodsAttachments().get(0).getSavePath();
         this.optionName = goods.getOptions().get(0).getOptionName();
         this.optionPrice = goods.getOptions().get(0).getOptionPrice();
         this.createdDt = goods.getCreatedDt();

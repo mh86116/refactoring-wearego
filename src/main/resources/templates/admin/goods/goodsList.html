@@ -42,7 +42,10 @@
                                 <td th:text="${list.optionPrice}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.body}" style="vertical-align: middle;"></td>
                                 <td style="vertical-align: middle;">
-                                    <button class="btn" onclick="processMember(this)">등업</button>
+                                    <button class="btn btn-success btn-xs" onclick="processApproval('examine', 'goods')"><i
+                                            class="fa fa-check"></i></button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"
+                                            data-target="#reject-modal"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                             </tbody>
@@ -57,6 +60,33 @@
                                 <button class="btn btn-send" onclick="searchGuide()">검색</button>
                             </div>
                         </form>
+
+
+                        <!--  Modal - Confirm -->
+                        <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body" align="center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <p align="center"> 상품등록 승인을 거절하시겠습니까? </p>
+                                        <br>
+                                        <label for="reject"></label><textarea class="form-control" rows="3" style=" height: 100px; resize: none;"
+                                                                              name="reject" id="reject" placeholder="거절 사유를 작성해주세요."></textarea>
+                                        <br>
+                                        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"
+                                                onclick="processApproval('reject', 'goods')">확인
+                                        </button>
+                                        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">취소
+                                        </button>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / Modal - Confirm -->
 
                         <!-- 페이징 처리-->
                         <ul class="dataTables_paginate paging_bootstrap pagination"

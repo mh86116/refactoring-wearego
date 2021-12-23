@@ -16,7 +16,7 @@
                                     <form id="joinForm" th:action="@{/join}" onsubmit="return checkForm();" class="aa-login-form" method="post">
                                         <div>
                                             <label>E-mail<span>*</span>
-                                                <input type="button" onclick="approval(1)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
+                                                <input type="button" onclick="examine(1)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
                                             </label>
                                             <label for="email1"><input type="email" placeholder="이메일을 입력해주세요" id="email1" name="email" required></label>
                                             <div class="alert alert-danger" id="checkEmailOk">이미 사용하고 있는 email 입니다. 확인해주세요.</div>
@@ -35,7 +35,7 @@
                                         <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
                                         <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
                                         <label for="nickname">닉네임<span>*</span>
-                                            <input type="button" onclick="approval(2)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
+                                            <input type="button" onclick="examine(2)" class="btn btn-fakeButton" value="중복확인" style="float: right; margin-bottom: 10px;">
                                         </label>
                                             <label><input type="text" id="nickname" placeholder="닉네임을 입력해주세요" name="nickname"></label>
                                         <div class="alert alert-danger" id="checkNicknameOk">중복된 닉네임입니다. 다시 입력해주세요</div>

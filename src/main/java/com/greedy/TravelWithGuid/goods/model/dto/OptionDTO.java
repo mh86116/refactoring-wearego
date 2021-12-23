@@ -1,4 +1,4 @@
-package com.greedy.TravelWithGuid.guide.model.dto;
+package com.greedy.TravelWithGuid.goods.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

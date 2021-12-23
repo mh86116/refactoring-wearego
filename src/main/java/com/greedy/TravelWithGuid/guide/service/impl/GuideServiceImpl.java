@@ -2,18 +2,18 @@ package com.greedy.TravelWithGuid.guide.service.impl;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
-import com.greedy.TravelWithGuid.guide.model.entity.Attachment;
+import com.greedy.TravelWithGuid.guide.model.entity.GuideAttachment;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.model.entity.GuideHistory;
-import com.greedy.TravelWithGuid.guide.repository.AttachmentRepository;
+import com.greedy.TravelWithGuid.guide.repository.GuideAttachmentRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideHistoryRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.guide.service.fileUploadService;
 import com.greedy.TravelWithGuid.member.model.dto.RejectGuideDTO;
-import com.greedy.TravelWithGuid.member.model.entity.GuideApproval;
+import com.greedy.TravelWithGuid.guide.model.entity.Examine;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
-import com.greedy.TravelWithGuid.member.model.enums.Approval;
+import com.greedy.TravelWithGuid.guide.model.enums.Approval;
 import com.greedy.TravelWithGuid.member.repository.GuideApprovalRepository;
 import com.greedy.TravelWithGuid.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class GuideServiceImpl implements GuideService {
     private final GuideHistoryRepository guideHistoryRepository;
     private final MemberRepository memberRepository;
     private final GuideApprovalRepository approvalRepository;
-    private final AttachmentRepository attachmentRepository;
+    private final GuideAttachmentRepository attachmentRepository;
 
     @Override
     public Page<GuideDTO> getGuides(String word, Pageable pageable, boolean name) {
@@ -58,8 +58,8 @@ public class GuideServiceImpl implements GuideService {
             Guide guide = Guide.createGuide(dto.getName(), dto.getEmail(), dto.getBank(), dto.getAccount(), dto.getIntro(), member, false);
             guideRepository.save(guide);
             //승인여부
-            GuideApproval approval = GuideApproval.createGuide(member, guide, Approval.SUBMIT);
-            approvalRepository.save(approval);
+            Examine examine = Examine.createGuide(member, guide, Approval.SUBMIT);
+            approvalRepository.save(examine);
             //image
             uploadService.fileUpload(multipartFileList, guide.getId(), "GUIDE");
 
@@ -68,11 +68,6 @@ public class GuideServiceImpl implements GuideService {
             log.error("guide save error!!! " + e);
             return false;
         }
-    }
-
-    @Override
-    public Guide getUpdateGuide(String name) {
-        return null;
     }
 
 //    @Override
@@ -85,7 +80,7 @@ public class GuideServiceImpl implements GuideService {
     @Override
     public void patchGuide(Long id) {
         //Approval
-        GuideApproval entity = findApprovalById(id);
+        Examine entity = findApprovalById(id);
         entity.patchApprove(entity.getId(), Approval.APPROVE);
         approvalRepository.save(entity);
         //Guide
@@ -97,11 +92,11 @@ public class GuideServiceImpl implements GuideService {
         member.patchMemberGuide(member.getId());
         memberRepository.save(member);
         //Photo
-        List<Attachment> a = attachmentRepository.RefNo(id);
-        for (Attachment photo : a) {
-            Attachment attachment = patchGuides(photo.getId());
-            attachment.patchPhoto(photo.getId(), true);
-            attachmentRepository.save(attachment);
+        List<GuideAttachment> a = attachmentRepository.RefNo(id);
+        for (GuideAttachment photo : a) {
+            GuideAttachment guideAttachment = patchGuides(photo.getId());
+            guideAttachment.patchPhoto(photo.getId(), true);
+            attachmentRepository.save(guideAttachment);
         }
     }
 
@@ -109,7 +104,7 @@ public class GuideServiceImpl implements GuideService {
     @Override
     public void getReject(Long id, String reject) {
         //Approval
-        GuideApproval entity = findApprovalById(id);
+        Examine entity = findApprovalById(id);
         entity.patchReject(id, Approval.REJECT, reject);
         approvalRepository.save(entity);
     }
@@ -131,7 +126,7 @@ public class GuideServiceImpl implements GuideService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다. guideId = " + id));
     }
 
-    private Attachment patchGuides(Long id) {
+    private GuideAttachment patchGuides(Long id) {
         return attachmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 사진 입니다. PhotoId = " + id));
     }
@@ -140,10 +135,10 @@ public class GuideServiceImpl implements GuideService {
         return guideHistoryRepository.findByRefNo(id);
     }
 
-    public Attachment attachmentByRefNo(Long id) {
+    public GuideAttachment attachmentByRefNo(Long id) {
         return attachmentRepository.findByRefNo(id);
     }
-    private GuideApproval findApprovalById(Long id) {
+    private Examine findApprovalById(Long id) {
         return approvalRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 회원입니다. id = " + id));
     }

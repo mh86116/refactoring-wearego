@@ -1,6 +1,7 @@
-package com.greedy.TravelWithGuid.guide.model.entity;
+package com.greedy.TravelWithGuid.goods.model.entity;
 
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
+import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
@@ -50,7 +51,7 @@ public class Goods extends BaseTimeEntity implements Persistable<Long> {
     private boolean isEnable;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
-    private List<Attachment> attachments;
+    private List<GoodsAttachment> goodsAttachments;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
     private List<GoodsOption> options;
@@ -65,7 +66,7 @@ public class Goods extends BaseTimeEntity implements Persistable<Long> {
                 .endDt(LocalDate.parse(endDt))
                 .person(Integer.valueOf(person))
                 .body(body)
-                .isEnable(false)
+                .isEnable(b)
                 .build();
     }
 

@@ -1,19 +1,21 @@
-package com.greedy.TravelWithGuid.member.model.entity;
+package com.greedy.TravelWithGuid.guide.model.entity;
 
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseEntity;
-import com.greedy.TravelWithGuid.guide.model.entity.Guide;
-import com.greedy.TravelWithGuid.member.model.enums.Approval;
-import com.greedy.TravelWithGuid.member.model.enums.Role;
+import com.greedy.TravelWithGuid.guide.model.enums.Approval;
+import com.greedy.TravelWithGuid.guide.model.enums.Category;
+import com.greedy.TravelWithGuid.member.model.entity.Member;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Getter @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class GuideApproval extends BaseEntity implements Persistable<Long> {
+public class Examine extends BaseEntity implements Persistable<Long> {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -25,7 +27,9 @@ public class GuideApproval extends BaseEntity implements Persistable<Long> {
     @JoinColumn(name = "GUIDE_NO")
     private Guide guide;
 
-
+    @Enumerated(STRING)
+    @Column(name = "CATEGORY")
+    private Category category;
 
     @Column(name = "APPROVAL")
     private Approval approval;
@@ -33,13 +37,13 @@ public class GuideApproval extends BaseEntity implements Persistable<Long> {
     @Column(name = "REJECT", length = 4000)
     private String reject;
 
-    public static GuideApproval createGuide(Member member, Guide guide, Approval value) {
-        return GuideApproval.builder()
+    public static Examine createGuide(Member member, Guide guide, Approval value) {
+        return Examine.builder()
                 .member(member)
                 .guide(guide)
                 .approval(value)
                 .build();
-    }
+}
 
     @Override
     public boolean isNew() {

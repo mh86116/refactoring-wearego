@@ -2,10 +2,10 @@ package com.greedy.TravelWithGuid.guide.repository.impl;
 
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
+import com.greedy.TravelWithGuid.guide.model.enums.Approval;
 import com.greedy.TravelWithGuid.guide.repository.GuideDsl;
 import com.greedy.TravelWithGuid.member.model.dto.RejectGuideDTO;
-import com.greedy.TravelWithGuid.member.model.entity.GuideApproval;
-import com.greedy.TravelWithGuid.member.model.enums.Approval;
+import com.greedy.TravelWithGuid.guide.model.entity.Examine;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -19,7 +19,6 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.greedy.TravelWithGuid.guide.model.entity.QAttachment.attachment;
 import static com.greedy.TravelWithGuid.guide.model.entity.QGuide.guide;
 import static com.greedy.TravelWithGuid.member.model.entity.QGuideApproval.guideApproval;
 
@@ -47,9 +46,9 @@ public class GuideDslImpl implements GuideDsl {
     public Page<RejectGuideDTO> getApproval(String word, Pageable pageable, String type) {
         switch (type) {
             case "SUBMIT": {
-                List<GuideApproval> approvals = selectApproval(word, pageable, type);
-                List<RejectGuideDTO> content = toApproval(approvals);
-                JPAQuery<GuideApproval> countQuery = queryFactory.selectFrom(guideApproval);
+                List<Examine> Examines = selectApproval(word, pageable, type);
+                List<RejectGuideDTO> content = toApproval(Examines);
+                JPAQuery<Examine> countQuery = queryFactory.selectFrom(guideApproval);
                 return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
             }
             case "APPROVE": {
@@ -59,9 +58,9 @@ public class GuideDslImpl implements GuideDsl {
 //                return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
             }
             case "REJECT": {
-                List<GuideApproval> approvals = selectApproval(word, pageable, type);
-                List<RejectGuideDTO> content = toApproval(approvals);
-                JPAQuery<GuideApproval> countQuery = queryFactory.selectFrom(guideApproval);
+                List<Examine> Examines = selectApproval(word, pageable, type);
+                List<RejectGuideDTO> content = toApproval(Examines);
+                JPAQuery<Examine> countQuery = queryFactory.selectFrom(guideApproval);
                 return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
             }
             default:
@@ -70,7 +69,7 @@ public class GuideDslImpl implements GuideDsl {
     }
 
 
-    private List<GuideApproval> selectApproval(String word, Pageable pageable, String type) {
+    private List<Examine> selectApproval(String word, Pageable pageable, String type) {
         return queryFactory
                 .selectFrom(guideApproval)
                 .where(getGuidePredicate(word)
@@ -81,8 +80,8 @@ public class GuideDslImpl implements GuideDsl {
                 .fetch();
     }
 
-    private List<RejectGuideDTO> toApproval(List<GuideApproval> approvals) {
-        return approvals.stream()
+    private List<RejectGuideDTO> toApproval(List<Examine> Examines) {
+        return Examines.stream()
                 .map(RejectGuideDTO:: new)
                 .collect(Collectors.toList());
     }

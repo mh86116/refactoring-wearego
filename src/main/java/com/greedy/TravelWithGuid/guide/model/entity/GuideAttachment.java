@@ -1,29 +1,22 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
-import com.greedy.TravelWithGuid.guide.model.enums.PhotoCategory;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
-import static javax.persistence.EnumType.STRING;
-
 @Getter @Entity
 @Builder @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ATTACHMENT")
-public class Attachment extends BaseTimeEntity implements Persistable<Long> {
+@Table(name = "GUIDE_ATTACHMENT")
+public class GuideAttachment extends BaseTimeEntity implements Persistable<Long> {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ATTACHMENT_NO")
     private Long id;
 
-    @Enumerated(STRING)
-    @Column(name = "CATEGORY")
-    private PhotoCategory category;
-
-    @JoinColumns({@JoinColumn(name = "GUIDE_NO", referencedColumnName = "GUIDE_NO"), @JoinColumn(name = "GOODS_NO", referencedColumnName = "GOODS_NO")})
+    @JoinColumn(name = "GUIDE_NO", referencedColumnName = "GUIDE_NO")
     @Column(name = "REF_NO")
     private Long refNo;
 
@@ -39,10 +32,9 @@ public class Attachment extends BaseTimeEntity implements Persistable<Long> {
     @Column(name = "IS_ENABLE")
     private boolean isEnable;
 
-    public static Attachment create(Long id, String originalFilename, String savedName, String path, String name) {
-        return Attachment.builder()
+    public static GuideAttachment create(Long id, String originalFilename, String savedName, String path) {
+        return GuideAttachment.builder()
                 .refNo(id)
-                .category(PhotoCategory.valueOf(name))
                 .originalName(originalFilename)
                 .savedName(savedName)
                 .savePath(path)

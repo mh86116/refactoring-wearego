@@ -1,4 +1,4 @@
-package com.greedy.TravelWithGuid.member.model.enums;
+package com.greedy.TravelWithGuid.guide.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -34,7 +34,7 @@ public class GuideDTO {
         this.warning = String.valueOf(guide.getWarning());
         this.createdDt = guide.getCreatedDt();
         this.isEnable = guide.isEnable();
-        this.imgUrl = guide.getAttachments().get(0).getSavePath();
+        this.imgUrl = guide.getGuideAttachments().get(0).getSavePath();
     }
 
 }

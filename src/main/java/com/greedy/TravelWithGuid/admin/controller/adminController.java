@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.admin.controller;
 
-import com.greedy.TravelWithGuid.guide.service.GoodsService;
+import com.greedy.TravelWithGuid.goods.service.GoodsService;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -116,6 +116,19 @@ public class adminController {
         } else {
             return "admin/goods/goodsList";
         }
+    }
+
+    @ResponseBody
+    @PatchMapping("/goods/{id}")
+    public String patchGoods(@PathVariable Long id, @RequestParam String value, @RequestParam(value = "reject", required = false) String reject) {
+        System.out.println("value = " + value);
+        System.out.println("reject = " + reject);
+        if (value.equals("approval")) {
+            goodsService.patchGoods(id);
+        } else {
+            goodsService.getReject(id, reject);
+        }
+        return "ok";
     }
 
     /******************************************************

@@ -1,4 +1,4 @@
-package com.greedy.TravelWithGuid.guide.model.entity;
+package com.greedy.TravelWithGuid.goods.model.entity;
 
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
 import lombok.*;

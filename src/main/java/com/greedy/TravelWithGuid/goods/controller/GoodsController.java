@@ -1,9 +1,9 @@
-package com.greedy.TravelWithGuid.guide.controller;
+package com.greedy.TravelWithGuid.goods.controller;
 
-import com.greedy.TravelWithGuid.guide.model.dto.EditGoodsDTO;
+import com.greedy.TravelWithGuid.goods.model.dto.EditGoodsDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
-import com.greedy.TravelWithGuid.guide.service.GoodsService;
+import com.greedy.TravelWithGuid.goods.service.GoodsService;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
