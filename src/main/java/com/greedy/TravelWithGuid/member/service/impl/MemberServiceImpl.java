@@ -1,6 +1,5 @@
 package com.greedy.TravelWithGuid.member.service.impl;
 
-import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberCheckDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDeleteDTO;

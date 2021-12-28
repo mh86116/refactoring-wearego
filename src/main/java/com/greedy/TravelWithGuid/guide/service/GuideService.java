@@ -2,6 +2,8 @@ package com.greedy.TravelWithGuid.guide.service;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
+import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
+import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.member.model.dto.RejectGuideDTO;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import org.springframework.data.domain.Page;
@@ -11,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface GuideService {
-    Page<GuideDTO> getGuides(String word, Pageable pageable, boolean name);
+    Page<GuideDTO> getGuides(String word, Pageable pageable);
 
     Page<RejectGuideDTO> getApproval(String word, Pageable pageable, String type);
 
@@ -21,4 +23,7 @@ public interface GuideService {
 
     void getReject(Long id, String reject);
 
+    Guide getUpdateGuide(String name);
+
+    void updateGuide(Long id, UpdateGuideDTO dto);
 }

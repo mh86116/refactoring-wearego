@@ -32,13 +32,13 @@
                                 <td th:text="${list.id}" style="vertical-align: middle;" id="no"></td>
                                 <td th:text="${list.email}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.name}" style="vertical-align: middle;"></td>
-                                <td><img th:src="${list.imgUrl}"></td>
+                                <td><img th:src="${list.imgUrl}" alt="" src=""></td>
                                 <td th:text="${list.bank}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.account}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
                                 <td style="vertical-align: middle;">
-                                    <button class="btn btn-success btn-xs" onclick="processApproval('examine', 'guide')"><i
+                                    <button class="btn btn-success btn-xs" onclick="processApproval('approval', 'guide')"><i
                                             class="fa fa-check"></i></button>
                                     <button class="btn btn-danger btn-xs" data-toggle="modal"
                                             data-target="#reject-modal"><i class="fa fa-trash-o"></i></button>
@@ -68,8 +68,8 @@
                                         </button>
                                         <p align="center"> 가이드 승인을 거절하시겠습니까? </p>
                                         <br>
-                                        <textarea class="form-control" rows="3" style=" height: 100px; resize: none;"
-                                                  name="reject" id="reject" placeholder="거절 사유를 작성해주세요."></textarea>
+                                        <label for="reject"></label><textarea class="form-control" rows="3" style=" height: 100px; resize: none;"
+                                                                              name="reject" id="reject" placeholder="거절 사유를 작성해주세요."></textarea>
                                         <br>
                                         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"
                                                 onclick="processApproval('reject', 'guide')">확인
@@ -88,10 +88,10 @@
                             th:with="start=${T(Math).floor(guides.number/10)*10 + 1},
                     last=(${start + 9 < guides.totalPages ? start + 9 : guides.totalPages})">
                             <th:block th:with="
-                firstAddr=@{/admin/guides(page=1,word=${word},paging=true)},
-                prevAddr=@{/admin/guides(page=${guides.number},word=${word},paging=true)},
-                nextAddr=@{/admin/guides(page=${guides.number + 2},word=${word},paging=true)},
-                lastAddr=@{/admin/guides(page=${guides.totalPages},word=${word},paging=true)}">
+                firstAddr=@{/admin/waitingGuides(page=1,word=${word},paging=true)},
+                prevAddr=@{/admin/waitingGuides(page=${guides.number},word=${word},paging=true)},
+                nextAddr=@{/admin/waitingGuides(page=${guides.number + 2},word=${word},paging=true)},
+                lastAddr=@{/admin/waitingGuides(page=${guides.totalPages},word=${word},paging=true)}">
                                 <!-- ** 첫번째 페이지 -->
                                 <li>
                                     <a th:href="${firstAddr}" aria-label="First">
@@ -109,7 +109,7 @@
                                 <li th:each="page: ${#numbers.sequence(start, last)}"
                                     th:class="${page == guides.number + 1} ? 'active'">
                                     <a th:text="${page}"
-                                       th:href="@{/admin/guides(page=${page},word=${word},paging=true)}"></a>
+                                       th:href="@{/admin/waitingGuides(page=${page},word=${word},paging=true)}"></a>
                                 </li><!-- /1,2,3,4,.. 페이지-->
                                 <!-- ** 다음 페이지 -->
                                 <li th:class="${guides.last} ? 'disabled'">

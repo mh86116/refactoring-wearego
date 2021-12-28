@@ -1,6 +1,7 @@
 package com.greedy.TravelWithGuid.guide.model.entity;
 
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
+import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.enums.GuideRank;
 import com.greedy.TravelWithGuid.guide.model.enums.Warning;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
@@ -76,4 +77,12 @@ public class Guide extends BaseTimeEntity implements Persistable<Long> {
 
     @Override
     public boolean isNew() { return getCreatedDt() == null; }
+
+
+    public void updateGuide(Long id, String email, String bank, String account) {
+        this.id = id;
+        this.email = (email != null) ? email : this.email;
+        this.bank = (bank != null) ? bank : this.bank;
+        this.account = (account != null) ? account : this.account;
+    }
 }

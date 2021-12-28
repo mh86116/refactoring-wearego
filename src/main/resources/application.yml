@@ -3,7 +3,7 @@ server:
 spring:
   profiles:
     # local: 개발 및 로컬 환경, prod: 서버 운영환경
-    active: local
+    active: prod
   thymeleaf:
     excluded-view-names: thymeleaf/*
     prefix: classpath:templates/

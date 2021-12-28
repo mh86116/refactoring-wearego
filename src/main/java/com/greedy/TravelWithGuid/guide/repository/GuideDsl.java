@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface GuideDsl {
-    Page<GuideDTO> getGuides(String word, Pageable pageable, boolean name);
+    Page<GuideDTO> getGuides(String word, Pageable pageable);
 
     Page<RejectGuideDTO> getApproval(String word, Pageable pageable, String type);
 }

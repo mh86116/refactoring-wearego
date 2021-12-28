@@ -20,6 +20,7 @@ public class GuideHistory extends BaseEntity implements Persistable<Long> {
     @Column(name = "HISTORY_NO")
     private Long id;
 
+    @JoinColumn(name = "GUIDE_NO", referencedColumnName = "GUIDE_NO")
     @Column(name = "REF_NO")
     private Long refNo;
 
@@ -32,11 +33,20 @@ public class GuideHistory extends BaseEntity implements Persistable<Long> {
     @Column(name = "AFTER_VALUE")
     private String afterValue;
 
-    public static GuideHistory createHistory(String history1, GuideCategory types, Long id) {
+
+    public static GuideHistory createHistory(Guide guide, Object history, GuideCategory types) {
+        return GuideHistory.builder()
+                .refNo(guide.getId())
+                .category(types)
+                .beforeValue(String.valueOf(history))
+                .build();
+    }
+
+    public static GuideHistory updateGuide(Long id, String history, GuideCategory types) {
         return GuideHistory.builder()
                 .refNo(id)
                 .category(types)
-                .beforeValue(history1)
+                .beforeValue(String.valueOf(history))
                 .build();
     }
 
@@ -44,4 +54,5 @@ public class GuideHistory extends BaseEntity implements Persistable<Long> {
     public boolean isNew() {
         return getUpdateDate() == null;
     }
+
 }

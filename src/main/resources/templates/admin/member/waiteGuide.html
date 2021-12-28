@@ -25,11 +25,10 @@
                 <th class="table-th"><i class=" fa fa-edit"></i>소개/경력기술</th>
                 <th class="table-th"><i class=" fa fa-edit"></i>승인상태</th>
                 <th class="table-th"><i class=" fa fa-edit"></i>신청날짜</th>
-                <th class="table-th"><i class=" fa fa-edit"></i>승인여부</th>
               </tr>
               </thead>
               <tbody>
-              <tr th:each="list : ${examine}">
+              <tr th:each="list : ${approval}">
                 <td th:text="${list.id}" style="vertical-align: middle;" id="no"></td>
                 <td th:text="${list.nickname}" style="vertical-align: middle;"></td>
                 <td th:text="${list.email}" style="vertical-align: middle;"></td>
@@ -38,14 +37,8 @@
                 <td th:text="${list.bank}" style="vertical-align: middle;"></td>
                 <td th:text="${list.account}" style="vertical-align: middle;"></td>
                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
-                <td th:text="${list.examine}" style="vertical-align: middle;"></td>
+                <td th:text="${list.approval}" style="vertical-align: middle;"></td>
                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
-                <td style="vertical-align: middle;">
-                  <button class="btn btn-success btn-xs" onclick="processApproval('examine',this)"><i
-                          class="fa fa-check"></i></button>
-                  <button class="btn btn-danger btn-xs" data-toggle="modal"
-                          data-target="#reject-modal"><i class="fa fa-trash-o"></i></button>
-                </td>
               </tr>
               </tbody>
             </table>
@@ -58,42 +51,15 @@
                 <button class="btn btn-send" onclick="searchMember()">검색</button>
               </div>
             </form>
-
-            <!--  Modal - Confirm -->
-            <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-body" align="center">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                      &times;
-                    </button>
-                    <p align="center"> 가이드 승인을 거절하시겠습니까? </p>
-                    <br>
-                    <textarea class="form-control" rows="3" style=" height: 100px; resize: none;"
-                              name="reject" id="reject" placeholder="거절 사유를 작성해주세요."></textarea>
-                    <br>
-                    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"
-                            onclick="processApproval('reject',this)">확인
-                    </button>
-                    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">취소
-                    </button>
-                    <br>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- / Modal - Confirm -->
-
             <!-- 페이징 처리 -->
             <ul class="dataTables_paginate paging_bootstrap pagination"
-                th:with="start=${T(Math).floor(examine.number/10)*10 + 1},
-                    last=(${start + 9 < examine.totalPages ? start + 9 : examine.totalPages})">
+                th:with="start=${T(Math).floor(approval.number/10)*10 + 1},
+                    last=(${start + 9 < approval.totalPages ? start + 9 : approval.totalPages})">
               <th:block th:with="
-                firstAddr=@{/admin/rejectGuide(page=1,word=${word},paging=true)},
-                prevAddr=@{/admin/rejectGuide(page=${examine.number},word=${word},paging=true)},
-                nextAddr=@{/admin/rejectGuide(page=${examine.number + 2},word=${word},paging=true)},
-                lastAddr=@{/admin/rejectGuide(page=${examine.totalPages},word=${word},paging=true)}">
+                firstAddr=@{/admin/waiteGuide(page=1,word=${word},paging=true)},
+                prevAddr=@{/admin/waiteGuide(page=${approval.number},word=${word},paging=true)},
+                nextAddr=@{/admin/waiteGuide(page=${approval.number + 2},word=${word},paging=true)},
+                lastAddr=@{/admin/waiteGuide(page=${approval.totalPages},word=${word},paging=true)}">
                 <!-- ** 첫번째 페이지 -->
                 <li>
                   <a th:href="${firstAddr}" aria-label="First">
@@ -101,21 +67,21 @@
                   </a>
                 </li><!-- /첫번째 페이지 -->
                 <!-- ** 이전 페이지 -->
-                <li th:class="${examine.first} ? 'disabled'">
-                  <a th:href="${examine.first} ? '#' :${prevAddr}"
+                <li th:class="${approval.first} ? 'disabled'">
+                  <a th:href="${approval.first} ? '#' :${prevAddr}"
                      aria-label="Previous">
                     <span aria-hidden="true">&lt;</span>
                   </a>
                 </li><!-- /이전 페이지 -->
                 <!-- ** 1,2,3,4,... 페이지 -->
                 <li th:each="page: ${#numbers.sequence(start, last)}"
-                    th:class="${page == examine.number + 1} ? 'active'">
+                    th:class="${page == approval.number + 1} ? 'active'">
                   <a th:text="${page}"
-                     th:href="@{/admin/rejectGuide(page=${page},word=${word},paging=true)}"></a>
+                     th:href="@{/admin/waiteGuide(page=${page},word=${word},paging=true)}"></a>
                 </li><!-- /1,2,3,4,.. 페이지-->
                 <!-- ** 다음 페이지 -->
-                <li th:class="${examine.last} ? 'disabled'">
-                  <a th:href="${examine.last} ? '#' : ${nextAddr}"
+                <li th:class="${approval.last} ? 'disabled'">
+                  <a th:href="${approval.last} ? '#' : ${nextAddr}"
                      aria-label="Next">
                     <span aria-hidden="true">&gt;</span>
                   </a>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{cmmn/layout/layout}" lang="ko">
 <body layout:fragment="content">
@@ -34,26 +34,30 @@
                                 <li><a href="/guide/delete">가이드취소</a></li>
                             </ul><!-- TAB 영역 끝 -->
                             <div class="aa-center">
-                                <form th:action="@{/guide/updateGuide}" method="post" encType="multipart/form-data"
-                                      style="margin-left: 30px;">
-                                <table>
-                                    <tr>
-                                        <td>이름</td>
-                                        <td><label><input type="text" name="name"></label></td>
-                                        <td>이메일</td>
-                                        <td><label><input type="email" name="email"></label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>은행</td>
-                                        <td><label><input type="text" name="bank"></label></td>
-                                        <td>계좌번호</td>
-                                        <td><label><input type="text" name="account"></label></td>
-                                    </tr>
-                                </table>
+                                <form onsubmit="return false;" style="margin-left: 30px;">
+                                    <table class="table">
+                                        <tr>
+                                            <td style="height: 50px; vertical-align: middle;">이름</td>
+                                            <td th:text="${guide.name}" name="name" style="height: 50px; vertical-align: middle;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 50px; vertical-align: middle;">이메일</td>
+                                            <td th:text="${guide.email}" contenteditable="true" id="guideEmail" name="email" style="height: 50px; vertical-align: middle;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 50px; vertical-align: middle;">은행</td>
+                                            <td th:text="${guide.bank}" contenteditable="true" id="guideBank" name="bank" style="height: 50px; vertical-align: middle;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 50px; vertical-align: middle;">계좌번호</td>
+                                            <td th:text="${guide.account}" contenteditable="true" id="guideAccount" name="account" style="height: 50px; vertical-align: middle;"></td>
+                                            <td hidden th:text="${guide.id}" id="guideId"></td>
+                                        </tr>
+                                    </table>
                                     <div style="text-align: center;">
-                                        <button type="submit" class="aa-browse-btn">신청하기</button>
+                                        <button type="submit" class="aa-browse-btn" onclick="updateGuide()">신청하기</button>
                                         <button type="reset" class="aa-browse-btn"
-                                                style="background-color: #ffffff; color:#ff6666">취소하기
+                                                style="background-color: #ffffff; margin-left: 10px; color:#ff6666">취소하기
                                         </button>
                                     </div>
                                 </form>

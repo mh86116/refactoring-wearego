@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class UpdateGuideDTO {
-    private String nickname;
-    private String phone;
+    private String email;
+    private String bank;
+    private String account;
 }

@@ -1,6 +1,5 @@
 package com.greedy.TravelWithGuid.member.model.entity;
 
-
 import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
 import com.greedy.TravelWithGuid.member.model.enums.Role;
 import lombok.*;

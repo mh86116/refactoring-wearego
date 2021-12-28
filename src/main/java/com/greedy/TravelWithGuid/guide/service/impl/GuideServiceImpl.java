@@ -2,12 +2,14 @@ package com.greedy.TravelWithGuid.guide.service.impl;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
+import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.GuideAttachment;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.model.entity.GuideHistory;
 import com.greedy.TravelWithGuid.guide.repository.GuideAttachmentRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideHistoryRepository;
 import com.greedy.TravelWithGuid.guide.repository.GuideRepository;
+import com.greedy.TravelWithGuid.guide.service.GuideHistoryService;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.guide.service.fileUploadService;
 import com.greedy.TravelWithGuid.member.model.dto.RejectGuideDTO;
@@ -32,16 +34,17 @@ import java.util.List;
 public class GuideServiceImpl implements GuideService {
     private final fileUploadService uploadService;
     private final GuideRepository guideRepository;
+    private final GuideHistoryService guideHistoryService;
     private final GuideHistoryRepository guideHistoryRepository;
     private final MemberRepository memberRepository;
     private final GuideApprovalRepository approvalRepository;
     private final GuideAttachmentRepository attachmentRepository;
 
     @Override
-    public Page<GuideDTO> getGuides(String word, Pageable pageable, boolean name) {
+    public Page<GuideDTO> getGuides(String word, Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, 20);
-        return guideRepository.getGuides(word, pageable, name);
+        return guideRepository.getGuides(word, pageable);
     }
 
     @Override
@@ -70,13 +73,6 @@ public class GuideServiceImpl implements GuideService {
         }
     }
 
-//    @Override
-//    public boolean getUpdateGuide(String name) {
-//        Guide guide = guideRepository.findRefNo(name);
-//        System.out.println("guide = " + guide.getId());
-//        System.out.println("guide.getName() = " + guide.getName());
-//    }
-
     @Override
     public void patchGuide(Long id) {
         //Approval
@@ -87,6 +83,8 @@ public class GuideServiceImpl implements GuideService {
         Guide guide = guideId(entity.getGuide().getId());
         guide.patchGuide(guide.getId());
         guideRepository.save(guide);
+        //GuideHistory
+        guideHistoryService.history(guide);
         //Member
         Member member = memberId(guide.getMember().getId());
         member.patchMemberGuide(member.getId());
@@ -100,13 +98,29 @@ public class GuideServiceImpl implements GuideService {
         }
     }
 
-
     @Override
     public void getReject(Long id, String reject) {
         //Approval
         Examine entity = findApprovalById(id);
         entity.patchReject(id, Approval.REJECT, reject);
         approvalRepository.save(entity);
+    }
+
+    @Override
+    public Guide getUpdateGuide(String name) {
+        Member member = findByEmail(name);
+        Guide guide = guideMember(member.getId());
+        return guideMember(member.getId());
+    }
+
+    //가이드 정보 수정
+    @Override
+    public void updateGuide(Long id, UpdateGuideDTO dto) {
+        Guide guide = guideId(id);
+        guide.updateGuide(guide.getId(), dto.getEmail(), dto.getBank(), dto.getAccount());
+        guideRepository.save(guide);
+
+        guideHistoryService.updateGuide(id, dto.getEmail(), dto.getBank(), dto.getAccount());
     }
 
     /**********************************************
@@ -133,6 +147,9 @@ public class GuideServiceImpl implements GuideService {
 
     public GuideHistory guideRefNo(Long id) {
         return guideHistoryRepository.findByRefNo(id);
+    }
+    public Guide guideMember(Long id) {
+        return guideRepository.findByMember(id);
     }
 
     public GuideAttachment attachmentByRefNo(Long id) {

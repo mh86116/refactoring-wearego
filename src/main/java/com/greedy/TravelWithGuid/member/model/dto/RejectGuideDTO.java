@@ -1,6 +1,8 @@
 package com.greedy.TravelWithGuid.member.model.dto;
 
 import com.greedy.TravelWithGuid.guide.model.entity.Examine;
+import com.greedy.TravelWithGuid.guide.model.enums.Approval;
+import com.greedy.TravelWithGuid.guide.model.enums.Category;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +21,7 @@ public class RejectGuideDTO {
     private String bank;
     private String account;
     private String intro;
+    private Approval examine;
     private LocalDateTime createdDt;
     private String reason;
     private LocalDateTime updateDt;
@@ -35,9 +38,8 @@ public class RejectGuideDTO {
         this.createdDt = entity.getCreatedDt();
         this.approval = entity.getApproval().getValue();
         this.imgUrl = entity.getGuide().getGuideAttachments().get(0).getSavePath();
+        this.examine = entity.getApproval();
         this.reason = entity.getReject();
         this.updateDt = entity.getUpdateDate();
-
     }
-
 }

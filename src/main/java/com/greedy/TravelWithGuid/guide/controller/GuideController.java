@@ -1,6 +1,7 @@
 package com.greedy.TravelWithGuid.guide.controller;
 
 import com.greedy.TravelWithGuid.guide.model.dto.EditGuideDTO;
+import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.guide.service.GuideService;
 import com.greedy.TravelWithGuid.member.model.entity.Member;
 import com.greedy.TravelWithGuid.member.repository.MemberRepository;
@@ -44,8 +45,15 @@ public class GuideController {
 
     @GetMapping("/updateGuide")
     public String updateGuide(Model model, Principal principal) {
-//       model.addAttribute("guide", guideService.getUpdateGuide(principal.getName()));
+       model.addAttribute("guide", guideService.getUpdateGuide(principal.getName()));
         return "guide/updateGuide";
+    }
+
+    @ResponseBody
+    @PatchMapping("/updateGuide/{id}")
+    public String patchGuide(@PathVariable Long id, @ModelAttribute("dto") UpdateGuideDTO dto) {
+        guideService.updateGuide(id, dto);
+        return "ok";
     }
 
     /************

@@ -37,7 +37,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	//DB
 	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'mysql:mysql-connector-java'
 	//queryDSL
 	implementation 'com.querydsl:querydsl-jpa'
 	//multipart 사용

@@ -1,10 +1,8 @@
 package com.greedy.TravelWithGuid.member.controller;
 
-import com.greedy.TravelWithGuid.guide.model.dto.UpdateGuideDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberCheckDTO;
 import com.greedy.TravelWithGuid.member.model.dto.MemberDeleteDTO;
 import com.greedy.TravelWithGuid.member.model.dto.UpdateMemberDTO;
-import com.greedy.TravelWithGuid.member.repository.MemberRepository;
 import com.greedy.TravelWithGuid.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
