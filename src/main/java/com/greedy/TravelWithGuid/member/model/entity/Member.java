@@ -1,6 +1,6 @@
 package com.greedy.TravelWithGuid.member.model.entity;
 
-import com.greedy.TravelWithGuid.cmmn.model.entity.BaseTimeEntity;
+import com.greedy.TravelWithGuid.cmmn.model.entity.BaseEntity;
 import com.greedy.TravelWithGuid.member.model.enums.Role;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "MEMBER")
-public class Member extends BaseTimeEntity implements Persistable<Long> {
+public class Member extends BaseEntity implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_NO", nullable = false)
