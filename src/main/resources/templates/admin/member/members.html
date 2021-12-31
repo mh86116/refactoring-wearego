@@ -33,7 +33,7 @@
                 <td th:text="${list.authority}" style="vertical-align: middle;"></td>
                 <td th:text="${list.phone}" style="vertical-align: middle;"></td>
                 <td th:text="${list.isEnable()}" style="vertical-align: middle;"></td>
-                <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
+                <td th:text="${#temporals.format(list.createdDt, 'yyyy-MM-dd HH:mm')}" style="vertical-align: middle;"></td>
                 <td style="vertical-align: middle;" >
                   <button class="btn" onclick="processMember(this)">등업</button>
                 </td>

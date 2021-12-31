@@ -3,7 +3,6 @@ package com.greedy.TravelWithGuid.guide.repository.impl;
 import com.greedy.TravelWithGuid.guide.model.dto.GuideDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
 import com.greedy.TravelWithGuid.guide.model.enums.Approval;
-import com.greedy.TravelWithGuid.guide.model.enums.GuideCategory;
 import com.greedy.TravelWithGuid.guide.repository.GuideDsl;
 import com.greedy.TravelWithGuid.member.model.dto.RejectGuideDTO;
 import com.greedy.TravelWithGuid.guide.model.entity.Examine;
@@ -30,11 +29,22 @@ public class GuideDslImpl implements GuideDsl {
 
     //가이드 신청 관리
     @Override
-    public Page<GuideDTO> getGuides(String word, Pageable pageable) {
-        List<Guide> guides = selectGuide(word, pageable);
+    public Page<GuideDTO> getGuideApproval(String word, Pageable pageable, String type) {
+        List<Guide> guides = guideSelect(word, pageable, type);
         List<GuideDTO> content = toGuideListDTOS(guides);
         JPAQuery<Guide> countQuery = queryFactory.selectFrom(guide);
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+    }
+
+    private List<Guide> guideSelect(String word, Pageable pageable, String type) {
+        return queryFactory
+                .selectFrom(guide)
+                .where(getGuidePredicate(word)
+                        .and(guide.examine.approval.eq(Approval.valueOf(type))))
+                .orderBy(guide.createdDt.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
     }
 
     @Override
@@ -46,19 +56,6 @@ public class GuideDslImpl implements GuideDsl {
     }
 
     //가이드 신청
-    private List<Guide> selectGuide(String word, Pageable pageable) {
-        return queryFactory
-                .selectFrom(guide)
-                .join(examine).on(guide.id.eq(guide.id))
-                .where(examine.approval.eq(Approval.SUBMIT)
-                        .and(getGuidePredicate(word)))
-                .orderBy(examine.createdDt.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
-    }
-
-
     private List<Examine> selectApproval(String word, Pageable pageable, String type) {
         return queryFactory
                 .selectFrom(examine)

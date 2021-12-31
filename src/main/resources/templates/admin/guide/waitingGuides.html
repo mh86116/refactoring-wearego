@@ -36,7 +36,7 @@
                                 <td th:text="${list.bank}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.account}" style="vertical-align: middle;"></td>
                                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
-                                <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
+                                <td th:text="${#temporals.format(list.createdDt, 'yyyy-MM-dd HH:mm')}" style="vertical-align: middle;"></td>
                                 <td style="vertical-align: middle;">
                                     <button class="btn btn-success btn-xs" onclick="processApproval('approval', 'guide')"><i
                                             class="fa fa-check"></i></button>

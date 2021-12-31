@@ -52,7 +52,7 @@ public class GuideHistory extends BaseEntity implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return getUpdateDate() == null;
+        return getUpdateDt() == null;
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface GuideService {
-    Page<GuideDTO> getGuides(String word, Pageable pageable);
+    Page<GuideDTO> getGuideApproval(String word, Pageable pageable, String type);
 
     Page<RejectGuideDTO> getApproval(String word, Pageable pageable, String type);
 
@@ -26,4 +26,5 @@ public interface GuideService {
     Guide getUpdateGuide(String name);
 
     void updateGuide(Long id, UpdateGuideDTO dto);
+
 }

@@ -41,10 +41,10 @@ public class GuideServiceImpl implements GuideService {
     private final GuideAttachmentRepository attachmentRepository;
 
     @Override
-    public Page<GuideDTO> getGuides(String word, Pageable pageable) {
+    public Page<GuideDTO> getGuideApproval(String word, Pageable pageable, String type) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, 20);
-        return guideRepository.getGuides(word, pageable);
+        return guideRepository.getGuideApproval(word, pageable, type);
     }
 
     @Override

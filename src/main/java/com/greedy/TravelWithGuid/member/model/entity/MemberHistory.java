@@ -53,6 +53,6 @@ public class MemberHistory extends BaseEntity implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return getUpdateDate() == null;
+        return getUpdateDt() == null;
     }
 }

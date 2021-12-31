@@ -39,7 +39,8 @@
                 <td th:text="${list.account}" style="vertical-align: middle;"></td>
                 <td th:text="${list.intro}" style="vertical-align: middle;"></td>
                 <td th:text="${list.approval}" style="vertical-align: middle;"></td>
-                <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
+                <td th:text="${#temporals.format(list.createdDt, 'yyyy-MM-dd HH:mm')}" style="vertical-align: middle;"></td>
+                <td th:text="${#temporals.format(list.updateDt, 'yyyy-MM-dd HH:mm')}" style="vertical-align: middle;"></td>
               </tr>
               </tbody>
             </table>

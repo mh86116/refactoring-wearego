@@ -23,7 +23,7 @@ public class Examine extends BaseEntity implements Persistable<Long> {
     private Member member;
 
     @OneToOne
-    @JoinColumn(name = "GUIDE_NO")
+    @JoinColumn(name = "GUIDE", referencedColumnName = "GUIDE_NO")
     private Guide guide;
 
     @Column(name = "APPROVAL")

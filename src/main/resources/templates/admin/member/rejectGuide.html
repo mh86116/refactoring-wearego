@@ -32,7 +32,7 @@
                 <td th:text="${list.createdDt}" style="vertical-align: middle;"></td>
                 <td th:text="${list.reason}" style="vertical-align: middle;"></td>
                 <td th:text="${list.approval}" style="vertical-align: middle;"></td>
-                <td th:text="${list.updateDt}" style="vertical-align: middle;"></td>
+                <td th:text="${#temporals.format(list.updateDt, 'yyyy-MM-dd HH:mm')}" style="vertical-align: middle;"></td>
               </tr>
               </tbody>
             </table>

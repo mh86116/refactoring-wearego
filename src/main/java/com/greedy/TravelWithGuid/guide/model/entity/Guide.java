@@ -55,6 +55,9 @@ public class Guide extends BaseEntity implements Persistable<Long> {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "refNo")
     private List<GuideAttachment> guideAttachments;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "guide")
+    private Examine examine;
+
     public static Guide createGuide(String name, String email, String bank, String account, String intro, Member member, boolean isEnable) {
         return Guide.builder()
                 .name(name)
@@ -74,14 +77,13 @@ public class Guide extends BaseEntity implements Persistable<Long> {
         this.isEnable = true;
     }
 
-    @Override
-    public boolean isNew() { return getCreatedDt() == null; }
-
-
     public void updateGuide(Long id, String email, String bank, String account) {
         this.id = id;
         this.email = (email != null) ? email : this.email;
         this.bank = (bank != null) ? bank : this.bank;
         this.account = (account != null) ? account : this.account;
     }
+
+    @Override
+    public boolean isNew() { return getCreatedDt() == null; }
 }

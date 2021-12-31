@@ -47,7 +47,7 @@ public class adminController {
     public String waitingGuides(Model model, @RequestParam(value = "word", required = false) String word,
                          @PageableDefault Pageable pageable, @RequestParam(required = false) boolean paging) {
         model.addAttribute("word", word);
-        model.addAttribute("guides", guideService.getGuides(word, pageable));
+        model.addAttribute("guides", guideService.getGuideApproval(word, pageable, "SUBMIT"));
         if (StringUtils.hasText(word) && !paging) {
             return "admin/guide/waitingGuides :: #guideTable";
         } else {

@@ -1,6 +1,7 @@
 package com.greedy.TravelWithGuid.guide.model.dto;
 
 import com.greedy.TravelWithGuid.guide.model.entity.Guide;
+import com.greedy.TravelWithGuid.guide.model.enums.Approval;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class GuideDTO {
     private String warning;
     private boolean isEnable;
     private String imgUrl;
+    private Approval approval;
 
     @QueryProjection
     public GuideDTO(Guide guide) {
@@ -35,6 +37,7 @@ public class GuideDTO {
         this.createdDt = guide.getCreatedDt();
         this.isEnable = guide.isEnable();
         this.imgUrl = guide.getGuideAttachments().get(0).getSavePath();
+        this.approval = guide.getExamine().getApproval();
     }
 
 }

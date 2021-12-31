@@ -40,6 +40,6 @@ public class RejectGuideDTO {
         this.imgUrl = entity.getGuide().getGuideAttachments().get(0).getSavePath();
         this.examine = entity.getApproval();
         this.reason = entity.getReject();
-        this.updateDt = entity.getUpdateDate();
+        this.updateDt = entity.getUpdateDt();
     }
 }
