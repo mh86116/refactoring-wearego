@@ -26,12 +26,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean join(JoinDTO dto) {
-//        Member email = memberRepository.findByEmail(dto.getEmail());
-//        if (email != null) {
-//            System.out.println(" 값이 있습니다. ");
-//        } else {
-//            System.out.println(" 값이 없습니다. ");
-//        }
         try {
             Member member = Member.builder()
                     .email(dto.getEmail())
@@ -58,11 +52,6 @@ public class LoginServiceImpl implements LoginService {
     /******************************************************
      * 공통 로직
      ******************************************************/
-    private Member findMemberById(Long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 회원입니다. memberId = " + id));
-    }
-
     private Member memberEmail(String email) {
         return memberRepository.findByEmail(email);
     }

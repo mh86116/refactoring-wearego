@@ -167,6 +167,7 @@ img {
   font-size: 16px;
   padding: 12px 18px;
   color: #fff;
+  cursor: pointer;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;

@@ -56,7 +56,7 @@
                         <li><a href="/admin/board/questions">자주하는질문</a></li>
                         <li class="login-menu"><a href="/admin/" sec:authorize="hasRole('ROLE_ADMIN')"> 관리자페이지</a></li>
                         <li class="login-menu"><a sec:authorize="isAnonymous()" data-toggle="modal"
-                                                  data-target="#login-modal">로그인</a></li>
+                                                  data-target="#login-modal" style="cursor: pointer;">로그인</a></li>
                         <li class="login-menu"><a sec:authorize="isAuthenticated()" th:href="@{/logout}" onload="noBack();">로그아웃</a></li>
                         <li class="login-menu"><a sec:authorize="isAuthenticated()" th:href="@{/member/myPage}"><span
                                 sec:authentication="name"></span>님! &ensp;반갑습니다.</a></li>
